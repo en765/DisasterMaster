@@ -11,28 +11,47 @@
 # Opis projekta
 Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz) na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu. 
 
-Kratko opisati cilj Vašeg projekta. Vaša motivacija?  (Napomena: odgovor nije »Zato što je to bio zadatak i nismo imali ideje za drugo.«). Koji problem rješavate?
-> Obzirom da je ovo zadani projekt navedite i što želite/jeste novo  naučili.
+# Ciljevi
+* olakšati i ubrzati dojave prirodnih katastrofa
+* izraditi aplikaciju koja je lako dostupna, brza i jednostavna za koristiti
+* steći osnovna znanja o programskom inženjerstvu kao što su organizacija i razvoj projekta
+* unaprijediti naše programske vještine
 
-> Dobro izrađen opis omogućuje vam da pokažete svoj rad drugim programerima, kao i potencijalnim poslodavcima. Ne samo da prvi dojam na stranici opisa često razlikuje dobar projekt od lošeg projekta već i predstavlja dobru praksu koju morate savladati.
 
 # Funkcijski zahtjevi
-> Navedite ključne zahtjeve Vašeg projekta.
+* Korisnik može prijaviti informacije o nepogodi (vrsta, lokacija, opis, fotografija)
+* Korisnik ima mogćnot prijave/registriranja u sustav
+* Korisnik može pratiti status prijave putem obavijesti poslanih mailom
+* Korisniku su dostupne informacije o sigurnosnim mjerama i resursima
+* Vlasti imaju pristup prijavama - mogu ih odbijati/prihvaćati
+* Vlasti imaju mogućnost generiranja statičkog izvješća
+* Humanitarne organizacije imaju pregled prijava kako bi skupile informacije o potrebama građana
+* Humanitarne organizacije mogu objavljivati informacije o sigurnosnim mjerama i resursima
+
+>### Nefunkcijski zahtjevi
+>* Aplikacija podnosi velik broj prijava
+>* Koristi se adekvatna zaštita podataka korisnika (anonimni i registrirani)
+>* Aplikacija je jednostavna za koršitenje
 
 
 # Tehnologije
+* Frontend: React,js, HTML, CSS
+* Backend: Spring Boot
+* Notifikacije: Twilio
+* Autentifikacija: OAuth 2.0
+* Mapa: OpenStreetMap
 
 
 #Instalcija
 # Članovi tima 
-> Elena Nesek (elena.nesek@fer.unizg.hr)
-> Leonarda Hunski (leonarda.hunski@fer.unizg.hr)
-> Petra Boras (petra.boras@fer.unizg.hr)
-> Luka Bobić (luka.bobic@fer.unizg.hr)
-> Željko Capan (zeljko.capan@fer.unizg.hr)
-> Arjana Ivković (arjana.ivkovic@fer.unizg.hr)
-> Nikola Marinović (nikola.marinovic@fer.unizg.hr)
-> /linkovi/ glavni doprinos
+>* Elena Nesek (elena.nesek@fer.unizg.hr) - organizacija, frontend
+>* Leonarda Hunski (leonarda.hunski@fer.unizg.hr) - frontend, dizajn
+>* Petra Boras (petra.boras@fer.unizg.hr) - frontend, dizajn
+>* Luka Bobić (luka.bobic@fer.unizg.hr) - backend
+>* Željko Capan (zeljko.capan@fer.unizg.hr) - backend, frontend
+>* Arjana Ivković (arjana.ivkovic@fer.unizg.hr) - backend
+>* Nikola Marinović (nikola.marinovic@fer.unizg.hr) - backend
+>* 
 >
 
 # Kontribucije
