@@ -1,4 +1,4 @@
 package dm_be.service
 
-interface UserService {
+public interface UserService {
 }
