@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Roboto+Slab:wght@400;700&display=swap');
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    margin-top: -20px;
+}
+
+.title {
+    font-family: "Gill Sans", sans-serif;
+    font-size: 50px;
+    text-align: center;
+    flex-grow: 1;
+    padding-left: 60px;
+}
+
+.menu-button {
+    font-size: 30px;
+    margin-left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.login {
+    margin-top: 0; /* Ukloni margine koje utječu na vertikalno poravnavanje */
+    width: 160px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Gill Sans", sans-serif;
+}
+
+.menu-button,
+.login {
+    z-index: 1; /* Zadržavanje slojnog reda */
+}
+
+.login:hover {
+    background-color: #7f9eced1;
+}
+  

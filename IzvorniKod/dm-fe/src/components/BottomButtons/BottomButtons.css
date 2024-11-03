@@ -1,0 +1,42 @@
+.bottom-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.left-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subscribe-button,
+.emergency-call-button,
+.add-report-button {
+    font-family: "Gill Sans", sans-serif;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.3s;
+}
+
+.add-report-button {
+    background-color: white;
+    border: 1px solid #333;
+    border-radius: 15px;
+    font-size: 20px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.subscribe-button:hover,
+.emergency-call-button:hover,
+.add-report-button:hover {
+    background-color: #7f9eced1;
+}
