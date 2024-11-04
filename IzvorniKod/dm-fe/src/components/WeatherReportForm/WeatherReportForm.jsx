@@ -16,13 +16,15 @@ function WeatherReportForm({ type, closeReportForm }) {
       maxZoom: 19,
     }).addTo(mapInstance);
 
-    mapInstance.on('click', async (e) => {
-      if (marker) {
-        map.removeLayer(marker);
-      }
-      const newMarker = L.marker(e.latlng).addTo(mapInstance);
-      setMarker(newMarker);
+    // Initialize a single marker and keep it in state
+    const initialMarker = L.marker([51.505, -0.09]).addTo(mapInstance);
+    setMarker(initialMarker);
 
+    mapInstance.on('click', async (e) => {
+      // Move the existing marker to the new location
+      initialMarker.setLatLng(e.latlng);
+
+      // Fetch location name based on the clicked coordinates
       const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`);
       const data = await response.json();
       const displayName = data.display_name || `${e.latlng.lat}, ${e.latlng.lng}`;
@@ -49,13 +51,9 @@ function WeatherReportForm({ type, closeReportForm }) {
         const data = await response.json();
         if (data.length > 0) {
           const { lat, lon } = data[0];
-          if (map) {
+          if (map && marker) {
             map.setView([lat, lon], 13);
-            if (marker) {
-              map.removeLayer(marker);
-            }
-            const newMarker = L.marker([lat, lon]).addTo(map);
-            setMarker(newMarker);
+            marker.setLatLng([lat, lon]);
             setLocation(`${lat}, ${lon}`);
           }
         } else {
