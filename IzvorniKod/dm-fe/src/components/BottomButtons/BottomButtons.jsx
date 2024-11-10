@@ -5,6 +5,13 @@ import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 function BottomButtons({ setAddReportOpen }) {
+
+  const appVersion = "1.0.0";
+
+  const openTermsOfUse = () => {
+    window.open("/terms-of-use.pdf", "_blank")
+  }
+
   return (
     <div className="bottom-buttons">
       <div className="left-buttons">
@@ -17,12 +24,21 @@ function BottomButtons({ setAddReportOpen }) {
           Call an emergency line
         </button>
       </div>
+
+      <div className="bottom-info">
+        <p> Version: {appVersion}</p>
+        <button className="terms-button" onClick={openTermsOfUse}>
+          Terms of Use
+        </button>
+      </div>
+
       <button
         className="add-report-button"
         onClick={() => setAddReportOpen((prev) => !prev)}
       >
         + Add new weather reports
       </button>
+
     </div>
   );
 }

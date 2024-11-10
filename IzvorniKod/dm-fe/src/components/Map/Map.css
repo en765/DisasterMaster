@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Ensures centered alignment */
     width: 65%;
-    margin-top: 10px; /* Spacing from the header */
+    margin: 10px auto; /* Centers the container horizontally */
 }
 
 .world-map {

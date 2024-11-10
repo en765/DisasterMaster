@@ -7,15 +7,24 @@
     width: 100%;
     box-sizing: border-box;
     padding: 0 20px;
-    margin-top: -20px;
 }
 
 .title {
     font-family: "Gill Sans", sans-serif;
     font-size: 50px;
+    margin-left: 50px;
     text-align: center;
     flex-grow: 1;
     padding-left: 60px;
+}
+
+.title-link {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Keeps the text color the same as the h1 */
+}
+
+.title-link:hover {
+    cursor: pointer;
 }
 
 .menu-button {

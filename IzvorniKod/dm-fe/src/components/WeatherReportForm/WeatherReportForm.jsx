@@ -96,18 +96,20 @@ function WeatherReportForm({ type, closeReportForm }) {
         <div className="form-content">
           <h2>{type}</h2>
           <form onSubmit={handleSubmit}>
-            <label>Location or coordinates</label>
+            <label style={{ fontSize: "20px" }}>Location or coordinates</label>
             <input
                 type="text"
                 placeholder="Enter location"
+                style={{ fontSize: "15px" , fontFamily: "Gill Sans"}}
                 value={locationInput}
                 onChange={handleLocationChange}
             />
             <button type="button" onClick={handleLocationSubmit}>Search</button>
-            <div id="map" style={{ height: "400px", width: "100%" }}></div>
+            <div id="map" style={{ height: "350px", width: "100%" }}></div>
             <label>Description</label>
             <textarea
                 placeholder="Describe the situation"
+                style={{ fontSize: "15px" , fontFamily: "Gill Sans"}}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             ></textarea>

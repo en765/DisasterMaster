@@ -5,7 +5,7 @@
     padding: 15px;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 10px;
+    margin-top: 50px;
 }
 
 .left-buttons {
@@ -23,8 +23,6 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: white;
-    transition: background-color 0.3s;
 }
 
 .add-report-button {
@@ -32,7 +30,30 @@
     border: 1px solid #333;
     border-radius: 15px;
     font-size: 20px;
-    animation: pulse 2s infinite ease-in-out;
+}
+
+.bottom-info {
+    margin-top: 30px;
+    text-align: center;
+    display: center;
+}
+
+.bottom-info p {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.terms-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.terms-button:hover {
+    text-decoration: underline;
 }
 
 .subscribe-button:hover,
@@ -40,3 +61,4 @@
 .add-report-button:hover {
     background-color: #7f9eced1;
 }
+
