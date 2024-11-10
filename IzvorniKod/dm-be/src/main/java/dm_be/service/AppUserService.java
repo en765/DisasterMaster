@@ -1,7 +1,7 @@
 package dm_be.service;
 
 import dm_be.domain.AppUser;
-import dm_be.rest.UserRequestDTO;
+import dm_be.rest.AppUserRequestDTO;
 
 import java.util.List;
 
