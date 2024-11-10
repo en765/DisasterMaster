@@ -22,8 +22,8 @@ public class Citizen extends User {
         this.isAnonymous = isAnonymous;
     }
 
-    public Citizen(Long userId, Long roleId, String email, String password, String firstName, String lastName, boolean isAnonymous) {
-        super(userId, roleId, email, password);
+    public Citizen(Long userId, Role role, String email, String password, String firstName, String lastName, boolean isAnonymous) {
+        super(userId, role, email, password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.isAnonymous = isAnonymous;
