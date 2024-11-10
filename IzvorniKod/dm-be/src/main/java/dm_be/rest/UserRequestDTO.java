@@ -1,6 +1,6 @@
 package dm_be.rest;
 
-public class UserRequestDTO {
+public class AppUserRequestDTO {
     private String userType;
     private String userId;
     private String email;
