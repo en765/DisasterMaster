@@ -3,7 +3,7 @@ package dm_be.domain;
 import jakarta.persistence.*;
 
 @Entity
-public class Citizen extends User {
+public class Citizen extends AppUser {
 
     @Column(name = "firstName")
     private String firstName;
