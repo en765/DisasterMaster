@@ -8,10 +8,11 @@ public abstract class User {
 
     @Id
     @Column(name = "userId", unique = true, nullable = false)
-    private String userId;
+    private Long userId;
 
+    @ManyToOne
     @Column(name = "roleId", nullable = false)
-    private String roleId;
+    private Role role;
 
     @Column(name = "email")
     private String email;
@@ -19,20 +20,29 @@ public abstract class User {
     @Column(name = "password")
     private String password;
 
-    public String getUserId() {
+    public User () {};
+
+    public User(Long userId, Role roleId, String email, String password) {
+        this.userId = userId;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getEmail() {
@@ -55,7 +65,7 @@ public abstract class User {
     public String toString() {
         return "User{" +
                 "userId='" + userId + '\'' +
-                ", roleId='" + roleId + '\'' +
+                ", role='" + role + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
