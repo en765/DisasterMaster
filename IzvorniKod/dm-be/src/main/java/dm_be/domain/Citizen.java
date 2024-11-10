@@ -14,6 +14,21 @@ public class Citizen extends User {
     @Column(name = "isAnonymous")
     private boolean isAnonymous;
 
+    public Citizen() {};
+
+    public Citizen(String firstName, String lastName, boolean isAnonymous) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isAnonymous = isAnonymous;
+    }
+
+    public Citizen(Long userId, Long roleId, String email, String password, String firstName, String lastName, boolean isAnonymous) {
+        super(userId, roleId, email, password);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isAnonymous = isAnonymous;
+    }
+
     public String getFirstName() {
         return firstName;
     }
