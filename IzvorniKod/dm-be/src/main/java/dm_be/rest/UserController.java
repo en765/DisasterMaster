@@ -1,7 +1,7 @@
 package dm_be.rest;
 
-import dm_be.domain.User;
-import dm_be.service.UserService;
+import dm_be.domain.AppUser;
+import dm_be.service.AppUserService;
 import dm_be.rest.UserRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,14 +16,14 @@ import static org.springframework.web.servlet.function.ServerResponse.ok;
 @RequestMapping("/users")
 public class UserController {
 
-    private UserService userService;
+    private AppUserService appUserService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(AppUserService appUserService) {
+        this.appUserService = appUserService;
     }
 
     @PostMapping("/citizen")
     public Citizen createCitizen(@RequestBody Citizen citizen, @RequestParam Long roleId) {
-        return (Citizen) userService.createUser(citizen, roleId);
+        return (Citizen) appUserService.createUser(citizen, roleId);
     }
 }
