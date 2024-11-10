@@ -6,16 +6,24 @@ import jakarta.persistence.*;
 public class Role {
 
     @Id
-    private String roleId;
+    private Long roleId;
 
     @Column(nullable = false)
     private String roleName;
 
-    public String getRoleId() {
+    public Role() {}
+
+    public Role(Long roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+    }
+
+
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
