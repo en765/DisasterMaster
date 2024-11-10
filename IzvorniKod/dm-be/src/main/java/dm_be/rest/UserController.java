@@ -7,21 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
+
+import static org.springframework.web.servlet.function.ServerResponse.ok;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService userService;
+    private UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserRequestDTO userRequest) {
-        User createdUser = userService.createUser(userRequest);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-    }
+   @GetMapping("/")
+    public ResponseEntity<List<User>> getAllUsers() {
+       return ResponseEntity.ok().body(userService.getAllUsers());
+   }
 }
