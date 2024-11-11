@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.*;
 
 @Entity
-class HumanitarianOrganisation extends AppUser {
+public class HumanitarianOrganisation extends AppUser {
     @Column(name = "orgName") //nullable = false?
     private String orgName;
 

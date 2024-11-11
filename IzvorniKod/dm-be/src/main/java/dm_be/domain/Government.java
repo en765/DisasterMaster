@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
-class Government extends AppUser{
+public class Government extends AppUser{
 
     @Column(name = "govName") //nullable = false?
     private String govName;
