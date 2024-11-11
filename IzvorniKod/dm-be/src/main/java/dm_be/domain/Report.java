@@ -1,15 +1,17 @@
 package dm_be.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 @Entity
 public class Report{
+
+    public Report() {}
 
     public enum DisasterType{
         POŽAR, POPLAVA, POTRES //eng? koje jos dodati?
     }
 
+    @Id
     @Column(name = "reportId", nullable = false)
     private String reportId;
 
