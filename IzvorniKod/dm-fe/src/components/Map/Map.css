@@ -1,24 +1,48 @@
 .map-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Ensures centered alignment */
-    width: 65%;
-    margin: 10px auto; /* Centers the container horizontally */
+  width: 50%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Horizontally centers the container */
+  text-align: center;
+  position: relative; /* Ensures no external elements affect its layout */
 }
 
-.world-map {
-    width: 100%;
-    max-width: 700px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+#homepage-map {
+  height: 400px; /* Adjusted height for smaller map */
+  width: 50%; /* Adjusted width to be responsive */
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.search-input {
-    margin-top: 10px;
-    padding: 8px;
-    width: 80%;
-    max-width: 300px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.search-bar input {
+  width: 250px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.search-bar button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #0056b3;
 }

@@ -1,13 +1,6 @@
 body {
-  background: radial-gradient(
-      circle at top,
-      rgba(137, 187, 210, 0.98),
-      rgba(69, 107, 110, 0.87)
-    ),
-    url('pictures/storm.png');
-  background-repeat: repeat;
-  background-size: cover, 25%;
-  height: 100vh; /* 100% of the viewport height */
+  background: url("pictures/background.png");
+  background-size: cover;
   overflow: hidden; /* Prevents scrolling */
 }
 
@@ -17,7 +10,6 @@ body {
   min-height: 100vh;
   font-family: "Gill Sans", sans-serif;
 }
-
 
 .background-content {
   flex: 1;

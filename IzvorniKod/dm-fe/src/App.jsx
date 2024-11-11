@@ -41,7 +41,7 @@ function App() {
   return (
     <Router>
       <div className={`app ${isLoginOpen ? "blurred" : ""}`}>
-        <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} onLoginOpen={handleLoginOpen}/>
         {menuOpen && <Menu closeMenu={closeMenu} />}
         {isLoginOpen && (
           <div className="login-overlay">
