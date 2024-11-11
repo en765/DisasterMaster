@@ -12,6 +12,8 @@ class HumanitarianOrganisation extends AppUser {
         this.orgName = orgName;
     }
 
+    public HumanitarianOrganisation() {}
+
     public String getOrgName() {
         return orgName;
     }

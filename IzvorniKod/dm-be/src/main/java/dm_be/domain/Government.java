@@ -13,6 +13,8 @@ class Government extends AppUser{
         this.govName = govName;
     }
 
+    public Government() {};
+
     public String getGovName() {
         return govName;
     }
