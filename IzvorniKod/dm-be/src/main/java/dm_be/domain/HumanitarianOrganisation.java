@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
-public class HumanitarianOrganisation /*extends User*/{
 
     @Column(name = "orgName") //nullable = false?
     private String orgName;
@@ -21,11 +20,8 @@ public class HumanitarianOrganisation /*extends User*/{
         this.orgName = orgName;
     }
 
-    /*@Override
     public String toString() {
         return "HumanitarianOrganisation{" +
-                "userId='" + super.userId + '\'' -treba li?
                 "orgName='" + orgName + '\'' +
                 '}';
-    }*/
 }
