@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
-
+class HumanitarianOrganisation extends AppUser {
     @Column(name = "orgName") //nullable = false?
     private String orgName;
 
@@ -19,9 +19,6 @@ import jakarta.persistence.Entity;
     public void setOrgName(String orgName) {
         this.orgName = orgName;
     }
-
-    public String toString() {
-        return "HumanitarianOrganisation{" +
-                "orgName='" + orgName + '\'' +
-                '}';
 }
+
+
