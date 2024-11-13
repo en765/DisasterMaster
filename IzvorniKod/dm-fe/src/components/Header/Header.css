@@ -1,26 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Roboto+Slab:wght@400;700&display=swap');
-
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     box-sizing: border-box;
     padding: 0 20px;
+    position: relative;
 }
 
 .title {
     font-family: "Gill Sans", sans-serif;
     font-size: 50px;
-    margin-left: 50px;
     text-align: center;
     flex-grow: 1;
     padding-left: 60px;
 }
 
 .title-link {
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Keeps the text color the same as the h1 */
+    text-decoration: none;
+    color: inherit;
 }
 
 .title-link:hover {
@@ -33,10 +31,21 @@
     background: none;
     border: none;
     cursor: pointer;
+    position: absolute;
+    left: 20px;
 }
 
-.login {
-    margin-top: 0; /* Ukloni margine koje utječu na vertikalno poravnavanje */
+.auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.login,
+.register {
     width: 160px;
     height: 40px;
     border-radius: 5px;
@@ -44,14 +53,17 @@
     cursor: pointer;
     font-size: 16px;
     font-family: "Gill Sans", sans-serif;
+    display: block;
+    text-align: center;
 }
 
 .menu-button,
-.login {
-    z-index: 1; /* Zadržavanje slojnog reda */
+.login,
+.register {
+    z-index: 1;
 }
 
-.login:hover {
+.login:hover,
+.register:hover {
     background-color: #7f9eced1;
 }
-  
