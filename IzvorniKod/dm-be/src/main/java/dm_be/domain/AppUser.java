@@ -22,7 +22,7 @@ public abstract class AppUser {
 
     public AppUser () {};
 
-    public AppUser(Long userId, Role roleId, String email, String password) {
+    public AppUser(Long userId, Role role, String email, String password) {
         this.userId = userId;
         this.role = role;
         this.email = email;
