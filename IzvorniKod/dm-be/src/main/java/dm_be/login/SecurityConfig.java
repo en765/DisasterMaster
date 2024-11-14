@@ -1,0 +1,28 @@
+package dm_be.login;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/login**", "/oauth2/**", "/error") // Disable CSRF for OAuth2 and error pages
+                )
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/", "/login**", "/error").permitAll() // Allow access to these paths
+                        .anyRequest().authenticated() // All other paths need authentication
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/home", true)   // Redirect to the front-end after successful login
+                        .failureUrl("/login?error=true")    // Redirect to the login page on failure
+                );
+
+        return http.build();
+    }
+}

@@ -19,7 +19,6 @@ function App() {
     const [addReportOpen, setAddReportOpen] = useState(false);
     const [reportType, setReportType] = useState(null);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
-    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
     const openReportForm = (type) => {
         setReportType(type);
@@ -38,14 +37,6 @@ function App() {
         setIsLoginOpen(false);
     };
 
-    const handleRegisterOpen = () => {
-        setIsRegisterOpen(true);
-    };
-
-    const handleRegisterClose = () => {
-        setIsRegisterOpen(false);
-    };
-
     const closeMenu = () => {
         setMenuOpen(false);
     };
@@ -53,25 +44,17 @@ function App() {
     return (
         <GoogleOAuthProvider clientId={clientId}>
             <Router>
-                <div className={`app ${isLoginOpen || isRegisterOpen ? "blurred" : ""}`}>
+                <div className={`app ${isLoginOpen ? "blurred" : ""}`}>
                     <Header
                         menuOpen={menuOpen}
                         setMenuOpen={setMenuOpen}
                         onLoginOpen={handleLoginOpen}
-                        onRegisterOpen={handleRegisterOpen}
                     />
                     {menuOpen && <Menu closeMenu={closeMenu} />}
 
                     {isLoginOpen && (
                         <div className="login-overlay">
                             <LoginForm handleLoginClose={handleLoginClose} />
-                        </div>
-                    )}
-
-                    {isRegisterOpen && (
-                        <div className="login-overlay">
-                            {/* Ensure RegisterForm is imported and defined */}
-                            <RegisterForm handleRegisterClose={handleRegisterClose} />
                         </div>
                     )}
 
