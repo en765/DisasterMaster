@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "npm run dev"
+    "start": "vite preview --host 0.0.0.0 --port $PORT"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
