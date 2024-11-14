@@ -1,14 +1,19 @@
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header/Header.jsx";
+import Menu from "./components/Menu/Menu.jsx";
+import Map from "./components/Map/Map.jsx";
+import BottomButtons from "./components/BottomButtons/BottomButtons.jsx";
 import AddWeatherReports from "./components/AddWeatherReports/AddWeatherReports.jsx";
 import WeatherReportForm from "./components/WeatherReportForm/WeatherReportForm.jsx";
 import LoginForm from "./components/Login/Login.jsx";
-import RegisterForm from "./components/Register/Register.jsx";
 //import RegisterForm from "./components/Register/Register.jsx";
 import SafetyMeasures from "./components/SafetyMeasures/SafetyMeasures.jsx";
 import NearestShelters from "./components/NearestShelters/NearestShelters.jsx";
 import "./App.css";
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // Upravljanje stanjem menija
   const [addReportOpen, setAddReportOpen] = useState(false);
   const [reportType, setReportType] = useState(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
