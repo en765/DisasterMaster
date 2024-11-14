@@ -7,7 +7,7 @@ import BottomButtons from "./components/BottomButtons/BottomButtons.jsx";
 import AddWeatherReports from "./components/AddWeatherReports/AddWeatherReports.jsx";
 import WeatherReportForm from "./components/WeatherReportForm/WeatherReportForm.jsx";
 import LoginForm from "./components/Login/Login.jsx";
-import RegisterForm from "./components/Register/Register.jsx";
+//import RegisterForm from "./components/Register/Register.jsx";
 import SafetyMeasures from "./components/SafetyMeasures/SafetyMeasures.jsx";
 import NearestShelters from "./components/NearestShelters/NearestShelters.jsx";
 import "./App.css";
