@@ -26,4 +26,9 @@ public class AppUserController {
     public Citizen createCitizen(@RequestBody Citizen citizen, @RequestParam Long roleId) {
         return (Citizen) appUserService.createUser(citizen, roleId);
     }
+
+    @GetMapping("/UserLogin")
+    public String userLogin(@RequestParam String username, @RequestParam String password) {
+        return "uspjeh";
+    }
 }
