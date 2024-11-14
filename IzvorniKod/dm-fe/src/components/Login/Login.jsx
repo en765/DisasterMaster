@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { GoogleLogin } from '@react-oauth/google'; // Import the GoogleLogin component
 import "./Login.css";
 
 export default function LoginForm({ handleLoginClose }) {
@@ -8,36 +8,53 @@ export default function LoginForm({ handleLoginClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Korisničko ime:", username);
-    console.log("Lozinka:", password);
+    console.log("Username:", username);
+    console.log("Password:", password);
+  };
+
+  const handleLoginSuccess = (response) => {
+    console.log('Login Success:', response);
+    // You can extract the Google OAuth token and use it for backend API calls
+  };
+
+  const handleLoginError = (error) => {
+    console.log('Login Error:', error);
   };
 
   return (
-    <div className="loginForm">
-      <form onSubmit={handleSubmit}>
-        <div className="username-login">
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
+      <div className="loginForm">
+        <form onSubmit={handleSubmit}>
+          <div className="username-login">
+            <label>Username:</label>
+            <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+            />
+          </div>
+          <div className="password-login">
+            <label>Password:</label>
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            />
+          </div>
+          <div className="button-container">
+            <button className="submit-login" type="submit">Login</button>
+            <button onClick={handleLoginClose} className="close-button">Close</button>
+          </div>
+        </form>
+
+
+        <div className="google-login-button">
+          <GoogleLogin
+              onSuccess={handleLoginSuccess}
+              onError={handleLoginError}
           />
         </div>
-        <div className="password-login">
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="button-container">
-          <button className="submit-login" type="submit">Login</button>
-          <button onClick={handleLoginClose} className="close-button">Close</button>
-        </div>
-      </form>
-    </div>
+      </div>
   );
 }
