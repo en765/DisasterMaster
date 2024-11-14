@@ -5,12 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    proxy: {
-      '/api': {
-        tagret: 'http://localhost:8080',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+    host: '0.0.0.0',               // Omogućava eksterni pristup
+    port: process.env.PORT || 3000, // Render koristi `PORT` varijablu okruženja
   },
 });
