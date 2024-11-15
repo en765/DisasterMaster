@@ -35,7 +35,11 @@
 .bottom-info {
     margin-top: 30px;
     text-align: center;
-    display: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .bottom-info p {
@@ -45,6 +49,10 @@
 }
 
 .terms-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
     background: none;
     border: none;
     cursor: pointer;

@@ -9,6 +9,7 @@ import WeatherReportForm from "./components/WeatherReportForm/WeatherReportForm.
 import LoginForm from "./components/Login/Login.jsx";
 import SafetyMeasures from "./components/SafetyMeasures/SafetyMeasures.jsx";
 import NearestShelters from "./components/NearestShelters/NearestShelters.jsx";
+import AvailableResources from "./components/AvailableResources/AvailableResources.jsx";
 import "./App.css";
 
 function App() {
@@ -80,6 +81,15 @@ function App() {
             path="/nearest-shelters"
             element={
               <NearestShelters
+                menuOpen={menuOpen}
+                setMenuOpen={setMenuOpen}
+              />
+            }
+          />
+          <Route
+            path="/available-resources"
+            element={
+              <AvailableResources
                 menuOpen={menuOpen}
                 setMenuOpen={setMenuOpen}
               />
