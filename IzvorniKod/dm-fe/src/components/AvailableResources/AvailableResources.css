@@ -1,0 +1,51 @@
+.available-resources-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+.emergency-contacts-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.emergency-contacts {
+  width: 48%;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+  padding: 20px; /* Add some padding for spacing inside the container */
+  border-radius: 8px; /* Optional: Adds rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better contrast */
+}
+
+.left-column {
+  border-right: 1px solid #ddd;
+  padding-right: 10px;
+}
+
+.right-column {
+  padding-left: 10px;
+}
+
+h3 {
+  color: #272626;
+  margin-top: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+}
+
+a {
+  color: #064990;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

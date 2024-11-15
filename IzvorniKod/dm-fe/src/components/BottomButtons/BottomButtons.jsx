@@ -12,6 +12,10 @@ function BottomButtons({ setAddReportOpen }) {
     window.open("/terms-of-use.pdf", "_blank")
   }
 
+  const openUserGuide = () => {
+    window.open("/user-guide.pdf", "_blank")
+  }
+
   return (
     <div className="bottom-buttons">
       <div className="left-buttons">
@@ -29,6 +33,9 @@ function BottomButtons({ setAddReportOpen }) {
         <p> Version: {appVersion}</p>
         <button className="terms-button" onClick={openTermsOfUse}>
           Terms of Use
+        </button>
+        <button className="terms-button" onClick={openUserGuide}>
+          User Guide
         </button>
       </div>
 

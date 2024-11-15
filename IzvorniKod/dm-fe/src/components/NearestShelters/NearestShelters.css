@@ -4,6 +4,10 @@
     margin: 0 auto;
     text-align: center;
   }
+
+h1 {
+  font-size: 25px;
+}
   
   .nearest-shelters input {
     width: 80%;
