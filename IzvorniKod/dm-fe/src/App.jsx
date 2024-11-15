@@ -73,7 +73,7 @@ function App() {
 
                     <Routes>
                         <Route
-                            path="/app"
+                            path="/"
                             element={
                                 <div className="main-content">
                                     <Map />
