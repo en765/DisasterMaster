@@ -47,6 +47,9 @@ Kada ste u pravom direktoriju unutar terminala pokreni komande:
    npm install
    npm run dev
 ```
+
+Users' guide: [users' guide- dm.pdf](https://github.com/user-attachments/files/17778611/users.guide-.dm.pdf)
+
 # Članovi tima 
 >* Elena Nesek (elena.nesek@fer.unizg.hr) - organizacija, frontend
 >* Leonarda Hunski (leonarda.hunski@fer.unizg.hr) - frontend, dizajn
