@@ -11,6 +11,7 @@ import WeatherReportForm from "./components/WeatherReportForm/WeatherReportForm.
 import LoginForm from "./components/Login/Login.jsx";
 import SafetyMeasures from "./components/SafetyMeasures/SafetyMeasures.jsx";
 import NearestShelters from "./components/NearestShelters/NearestShelters.jsx";
+import AvailableResources from "./components/AvailableResources/AvailableResources.jsx";
 import "./App.css";
 
 const clientId = "69989007687-a952936cnqckikreccsoj1h51ht23vis.apps.googleusercontent.com";
@@ -91,6 +92,7 @@ function App() {
                         />
                         <Route path="/safety-measures" element={<SafetyMeasures menuOpen={menuOpen} setMenuOpen={setMenuOpen} />} />
                         <Route path="/nearest-shelters" element={<NearestShelters menuOpen={menuOpen} setMenuOpen={setMenuOpen} />} />
+                        <Route path="/available-resources" element={<AvailableResources menuOpen={menuOpen} setMenuOpen={setMenuOpen} />} />
                     </Routes>
                 </div>
             </Router>
