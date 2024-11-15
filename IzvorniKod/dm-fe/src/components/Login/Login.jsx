@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { GoogleLogin } from '@react-oauth/google'; // Import the GoogleLogin component
 import "./Login.css";
 
 export default function LoginForm({ handleLoginClose }) {
@@ -12,14 +11,6 @@ export default function LoginForm({ handleLoginClose }) {
     console.log("Password:", password);
   };
 
-  const handleLoginSuccess = (response) => {
-    console.log('Login Success:', response);
-    // You can extract the Google OAuth token and use it for backend API calls
-  };
-
-  const handleLoginError = (error) => {
-    console.log('Login Error:', error);
-  };
 
   return (
       <div className="loginForm">
@@ -47,14 +38,6 @@ export default function LoginForm({ handleLoginClose }) {
             <button onClick={handleLoginClose} className="close-button">Close</button>
           </div>
         </form>
-
-
-        <div className="google-login-button">
-          <GoogleLogin
-              onSuccess={handleLoginSuccess}
-              onError={handleLoginError}
-          />
-        </div>
       </div>
   );
 }

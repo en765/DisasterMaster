@@ -18,3 +18,7 @@ body {
   align-items: center;
   gap: 20px;
 }
+
+.map-disabled {
+  pointer-events: none; /* Disable interaction with the map */
+}
