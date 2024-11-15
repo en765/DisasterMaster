@@ -1,8 +1,11 @@
 # DisasterMaster
-# Programsko inženjerstvo
+Projektna aplikacija za prijavu nepogoda
 
+
+Deployment nase aplikacije mozete pronaci na stranici:          [DisasterMaser](https://disastermaster.onrender.com/)
 # Opis projekta
-Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz) na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu. 
+Ovaj projekt je rezultat timskog rada u sklopu projeknog zadatka kolegija [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz) na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu. 
+Nas zadatak je izraditi u potpunosti funkcionalnu aplikaciju unutar koje ce korisnici moci prijavljivati razlicite vrste nepogoda, primati obavijesti putem maila te dobiti informacije o sklonistima i resursima u slucaju vremenskih nepogoda. Nadamo se da ce aplikacija biti korisna te da cemo znacajno obogatit nase znanje o programskom inzenjerstvu i steci dojam o tome kako se procesi inzenjerstva odvijaju u poslovnom svijetu.
 
 # Ciljevi
 * olakšati i ubrzati dojave prirodnih katastrofa
@@ -35,7 +38,15 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 * Mapa: OpenStreetMap
 
 
-#Instalcija
+# Instalcija
+Kako bi se pokrenula aplikacije, potrebno je navigirati se do App.jsx 
+>* IzvorniKod/dm-fe/src
+
+Kada ste u pravom direktoriju unutar terminala pokreni komande:
+```
+   npm install
+   npm run dev
+```
 # Članovi tima 
 >* Elena Nesek (elena.nesek@fer.unizg.hr) - organizacija, frontend
 >* Leonarda Hunski (leonarda.hunski@fer.unizg.hr) - frontend, dizajn
@@ -44,11 +55,6 @@ Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Progra
 >* Željko Capan (zeljko.capan@fer.unizg.hr) - backend, frontend
 >* Arjana Ivković (arjana.ivkovic@fer.unizg.hr) - backend
 >* Nikola Marinović (nikola.marinovic@fer.unizg.hr) - backend
->* 
->
-
-# Kontribucije
->Pravila ovise o organizaciji tima i su često izdvojena u CONTRIBUTING.md
 
 
 
