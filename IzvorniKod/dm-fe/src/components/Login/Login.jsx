@@ -1,8 +1,9 @@
+// LoginForm.jsx
 import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import "./Login.css";
 
-export default function LoginForm({ handleLoginClose }) {
+export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,12 +18,13 @@ export default function LoginForm({ handleLoginClose }) {
       const data = await response.text();
       console.log("Traditional Login Response:", data);
       alert(data);
+      onLoginSuccess(); // Trigger login state change
     } catch (error) {
       console.error("Error during traditional login:", error);
     }
   };
 
-  const handleLoginSuccess = async (response) => {
+  const handleGoogleLoginSuccess = async (response) => {
     console.log("Google login successful:", response);
     const token = response.credential;
     try {
@@ -35,12 +37,13 @@ export default function LoginForm({ handleLoginClose }) {
       const data = await res.text();
       console.log("Google OAuth Response:", data);
       alert(`Google Login Successful! Welcome, ${data}`);
+      onLoginSuccess(); // Trigger login state change
     } catch (error) {
       console.error("Error during Google OAuth login:", error);
     }
   };
 
-  const handleLoginError = (error) => {
+  const handleGoogleLoginError = (error) => {
     console.error("Google login error:", error);
     alert("Google Login Failed!");
   };
@@ -78,8 +81,8 @@ export default function LoginForm({ handleLoginClose }) {
 
         <div className="google-login-button">
           <GoogleLogin
-              onSuccess={handleLoginSuccess}
-              onError={handleLoginError}
+              onSuccess={handleGoogleLoginSuccess}
+              onError={handleGoogleLoginError}
           />
         </div>
       </div>
