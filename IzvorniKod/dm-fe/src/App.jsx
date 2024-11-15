@@ -43,7 +43,6 @@ function App() {
         setIsRegisterOpen(true);
     };
 
-<<<<<<< HEAD
   return (
     <Router>
       <div className={`app ${isLoginOpen ? "blurred" : ""}`}>
@@ -104,83 +103,6 @@ function App() {
       </div>
     </Router>
   );
-=======
-    const handleRegisterClose = () => {
-        setIsRegisterOpen(false);
-    };
-
-    const closeMenu = () => {
-        setMenuOpen(false);
-    };
-
-    return (
-        <GoogleOAuthProvider clientId={clientId}>
-            <Router>
-                <div className={`app ${isLoginOpen || isRegisterOpen ? "blurred" : ""}`}>
-                    <Header
-                        menuOpen={menuOpen}
-                        setMenuOpen={setMenuOpen}
-                        onLoginOpen={handleLoginOpen}
-                        onRegisterOpen={handleRegisterOpen}
-                    />
-                    {menuOpen && <Menu closeMenu={closeMenu} />}
-
-                    {isLoginOpen && (
-                        <div className="login-overlay">
-                            <LoginForm handleLoginClose={handleLoginClose} />
-                        </div>
-                    )}
-
-                    {isRegisterOpen && (
-                        <div className="login-overlay">
-                            {/* Ensure RegisterForm is imported and defined */}
-                            <RegisterForm handleRegisterClose={handleRegisterClose} />
-                        </div>
-                    )}
-
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={
-                                <div className="main-content">
-                                    <Map />
-                                    {addReportOpen && (
-                                        <AddWeatherReports openReportForm={openReportForm} />
-                                    )}
-                                    {reportType && (
-                                        <WeatherReportForm
-                                            type={reportType}
-                                            closeReportForm={closeReportForm}
-                                        />
-                                    )}
-                                    <BottomButtons setAddReportOpen={setAddReportOpen} />
-                                </div>
-                            }
-                        />
-                        <Route
-                            path="/safety-measures"
-                            element={
-                                <SafetyMeasures
-                                    menuOpen={menuOpen}
-                                    setMenuOpen={setMenuOpen}
-                                />
-                            }
-                        />
-                        <Route
-                            path="/nearest-shelters"
-                            element={
-                                <NearestShelters
-                                    menuOpen={menuOpen}
-                                    setMenuOpen={setMenuOpen}
-                                />
-                            }
-                        />
-                    </Routes>
-                </div>
-            </Router>
-        </GoogleOAuthProvider>
-    );
->>>>>>> d5fc7dd2389d488ddcc2bdc759c403aef26909ff
 }
 
 export default App;
