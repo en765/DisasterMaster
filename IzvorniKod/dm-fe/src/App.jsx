@@ -15,7 +15,7 @@ import NearestShelters from "./components/NearestShelters/NearestShelters.jsx";
 import AvailableResources from "./components/AvailableResources/AvailableResources.jsx";
 import "./App.css";
 
-const clientId = "69989007687-a952936cnqckikreccsoj1h51ht23vis.apps.googleusercontent.com";
+const clientId = "800763204372-6hekpah0bsrb62mhp0oi16522ihbpi0b.apps.googleusercontent.com";
 
 function App() {
     const [menuOpen, setMenuOpen] = useState(false);
