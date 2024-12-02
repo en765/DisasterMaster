@@ -1,5 +1,5 @@
 // App.jsx
-import pkg from 'pg';
+//import pkg from 'pg';
 import React, { useState } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -24,8 +24,8 @@ function App() {
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
-    const { Pool } = pkg;
-    const pool = new Pool({ connectionString: ProcessingInstruction.env.DATABSE_URL });
+    //const { Pool } = pkg;
+    //const pool = new Pool({ connectionString: ProcessingInstruction.env.DATABSE_URL });
 
     const openReportForm = (type) => {
         setReportType(type);

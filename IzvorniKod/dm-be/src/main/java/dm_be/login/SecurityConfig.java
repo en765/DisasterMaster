@@ -24,7 +24,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated() // All other paths need authentication
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .defaultSuccessUrl("/home", true)   // Redirect to the front-end after successful login
+                        .defaultSuccessUrl("/auth/oauth2/success", true)   // Redirect to the front-end after successful login
                         .failureUrl("/login?error=true")    // Redirect to the login page on failure
                 );
 
@@ -35,7 +35,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://disastermaster.onrender.com/"));
+        configuration.setAllowedOrigins(Arrays.asList("https://disastermaster.onrender.com/", "http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
