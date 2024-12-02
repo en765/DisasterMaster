@@ -1,4 +1,5 @@
 // App.jsx
+import pkg from 'pg';
 import React, { useState } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
