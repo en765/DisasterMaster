@@ -23,6 +23,9 @@ function App() {
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
+    const { Pool } = pkg;
+    const pool = new Pool({ connectionString: ProcessingInstruction.env.DATABSE_URL });
+
     const openReportForm = (type) => {
         setReportType(type);
         setAddReportOpen(false);
