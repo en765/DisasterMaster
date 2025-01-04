@@ -5,14 +5,19 @@ import jakarta.persistence.*;
 @Entity
 public class Citizen extends AppUser {
 
-    @Column(name = "firstName")
+    @Column(name = "firstName", nullable = false)
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
     @Column(name = "isAnonymous")
     private boolean isAnonymous;
+
+    /*
+    @OneToMany(mappedBy = "citizen", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Report> reports = new ArrayList<>();  
+     */
 
     public Citizen() {};
 
@@ -52,6 +57,22 @@ public class Citizen extends AppUser {
     public void setAnonymous(boolean anonymous) {
         isAnonymous = anonymous;
     }
+
+    /*
+    public List<Report> getReports() {
+        return reports;
+    }
+
+    public void addReport(Report report) {
+        reports.add(report);
+        report.setCitizen(this);
+    }
+
+    public void removeReport(Report report) {
+        reports.remove(report);
+        report.setCitizen(null);
+    }
+     */
 
     @Override
     public String toString() {
