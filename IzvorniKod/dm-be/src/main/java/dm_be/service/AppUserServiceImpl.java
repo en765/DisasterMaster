@@ -7,6 +7,7 @@ import dm_be.domain.Role;
 import dm_be.service.AppUserService;
 import org.springframework.stereotype.Service;
 
+@Service
 public class AppUserServiceImpl implements AppUserService {
     
     private final RoleRepository roleRepo;

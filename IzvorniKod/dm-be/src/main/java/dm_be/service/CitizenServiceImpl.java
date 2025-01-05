@@ -10,6 +10,7 @@ import dm_be.dto.CitizenRequestDTO;
 //import dm_be.service.ReportService;
 import org.springframework.stereotype.Service;
 
+@Service
 public class CitizenServiceImpl implements CitizenService {
 
     private final CitizenRepository citizenRepo;
