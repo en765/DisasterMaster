@@ -6,8 +6,8 @@ import java.util.*;
 
 public interface AppUserService {
     List<AppUser> getAllUsers();
-    void addAppUser(AppUserRequestDTO AppUser);
-    AppUser getUserById(Long id);
+    AppUser addAppUser(AppUserRequestDTO AppUser);
+    //AppUser getUserById(Long id);
 
     /*
     //goverment + hum_org
