@@ -1,23 +1,20 @@
 package dm_be.domain;
 
+import java.util.*;
+
 import jakarta.persistence.*;
 
 @Entity
 public class Role {
 
     @Id
+    @GeneratedValue
     private Long roleId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String roleName;
 
     public Role() {}
-
-    public Role(Long roleId, String roleName) {
-        this.roleId = roleId;
-        this.roleName = roleName;
-    }
-
 
     public Long getRoleId() {
         return roleId;
@@ -42,4 +39,6 @@ public class Role {
                 ", roleName='" + roleName + '\'' +
                 '}';
     }
+
+
 }

@@ -1,33 +1,34 @@
 package dm_be.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.*;
+
+import org.hibernate.annotations.JoinColumnOrFormula;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-//@Table(name="AppUser")
-public abstract class AppUser {
+@Table(name="users")
+public class AppUser {
 
     @Id
-    @Column(name = "userId", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @ManyToOne
-    private Role role;
+    @NotNull
+    private String username;
 
-    @Column(name = "email")
+    @NotNull
     private String email;
 
-    @Column(name = "password")
+    @NotNull
     private String password;
 
-    public AppUser () {};
+    @ManyToOne
+    @JoinColumn(name="role_id")
+    private Role role;
 
-    public AppUser(Long userId, Role roleId, String email, String password) {
-        this.userId = userId;
-        this.role = role;
-        this.email = email;
-        this.password = password;
-    }
+    public AppUser () {};
 
     public Long getUserId() {
         return userId;
@@ -43,6 +44,14 @@ public abstract class AppUser {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

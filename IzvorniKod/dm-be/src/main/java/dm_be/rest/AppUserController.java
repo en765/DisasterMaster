@@ -1,29 +1,35 @@
 package dm_be.rest;
 
-import dm_be.domain.AppUser;
-import dm_be.service.AppUserService;
-import dm_be.rest.AppUserRequestDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.util.*;
+import dm_be.service.*;
 import dm_be.domain.*;
+import dm_be.dto.AppUserRequestDTO;
 
-import static org.springframework.web.servlet.function.ServerResponse.ok;
+import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/users")
 public class AppUserController {
-
+    
+    @Autowired
     private AppUserService appUserService;
 
-    public AppUserController(AppUserService appUserService) {
-        this.appUserService = appUserService;
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("")
+    public List<AppUser> getAllUsers() {
+        return appUserService.getAllUsers();
     }
 
-    @PostMapping("/citizen")
-    public Citizen createCitizen(@RequestBody Citizen citizen, @RequestParam Long roleId) {
-        return (Citizen) appUserService.createUser(citizen, roleId);
+    @PostMapping("/register")
+    public void addAppUser(@RequestBody AppUserRequestDTO appUser) {
+        appUserService.addAppUser(appUser);
     }
+
+
 }
