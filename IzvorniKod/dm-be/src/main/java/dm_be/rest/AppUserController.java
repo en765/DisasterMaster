@@ -6,6 +6,8 @@ import dm_be.dto.AppUserRequestDTO;
 
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,8 +29,9 @@ public class AppUserController {
     }
 
     @PostMapping("/register")
-    public void addAppUser(@RequestBody AppUserRequestDTO appUser) {
-        appUserService.addAppUser(appUser);
+    public ResponseEntity<AppUser> addAppUser(@RequestBody AppUserRequestDTO appUser) {
+        AppUser createdUser = appUserService.addAppUser(appUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
 
