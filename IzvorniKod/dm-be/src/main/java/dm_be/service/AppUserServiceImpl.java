@@ -8,7 +8,7 @@ import dm_be.dto.AppUserRequestDTO;
 import dm_be.service.AppUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,9 +22,6 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<AppUser> getAllUsers() {
@@ -45,7 +42,7 @@ public class AppUserServiceImpl implements AppUserService {
         AppUser appUser = new AppUser();
         appUser.setUsername(appUserRequestDTO.getUsername());
         appUser.setEmail(appUserRequestDTO.getEmail());
-        appUser.setPassword(passwordEncoder.encode(appUserRequestDTO.getPassword())); // Lozinka je hashirana
+        appUser.setPassword(appUserRequestDTO.getPassword()); // Lozinka je hashirana
         appUser.setRole(role);
 
         return appUserRepository.save(appUser);
