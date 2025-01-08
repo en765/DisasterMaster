@@ -16,15 +16,12 @@ function WeatherReportForm({ type, closeReportForm }) {
       maxZoom: 19,
     }).addTo(mapInstance);
 
-    // Initialize a single marker and keep it in state
     const initialMarker = L.marker([51.505, -0.09]).addTo(mapInstance);
     setMarker(initialMarker);
 
     mapInstance.on('click', async (e) => {
-      // Move the existing marker to the new location
       initialMarker.setLatLng(e.latlng);
 
-      // Fetch location name based on the clicked coordinates
       const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`);
       const data = await response.json();
       const displayName = data.display_name || `${e.latlng.lat}, ${e.latlng.lng}`;
@@ -66,28 +63,22 @@ function WeatherReportForm({ type, closeReportForm }) {
     }
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+
     const report = { location, description };
 
-    try {
-      const response = await fetch("/api/weather-reports", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(report),
-      });
+    // Fetch existing reports from localStorage
+    const storedReports = JSON.parse(localStorage.getItem("weatherReports")) || [];
 
-      if (response.ok) {
-        console.log("Weather report submitted successfully!");
-        closeReportForm();
-      } else {
-        console.error("Failed to submit weather report.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    // Add the new report to the list
+    const updatedReports = [...storedReports, report];
+
+    // Store updated reports back into localStorage
+    localStorage.setItem("weatherReports", JSON.stringify(updatedReports));
+
+    console.log("Weather report saved to localStorage:", report);
+    closeReportForm();
   };
 
   return (
