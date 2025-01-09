@@ -46,3 +46,27 @@
 .search-bar button:hover {
   background-color: #0056b3;
 }
+
+.earthquake-icon {
+  font-size: 24px; /* Veličina emoji-ja */
+  text-align: center;
+  line-height: 30px; /* Poravnanje emoji-ja */
+}
+
+.fire-icon {
+  font-size: 24px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.flood-icon {
+  font-size: 24px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.storm-icon {
+  font-size: 24px;
+  text-align: center;
+  line-height: 30px;
+}

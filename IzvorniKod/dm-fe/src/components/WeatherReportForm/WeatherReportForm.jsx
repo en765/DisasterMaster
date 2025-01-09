@@ -66,7 +66,15 @@ function WeatherReportForm({ type, closeReportForm }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const report = { location, description };
+    const report = { 
+      type,
+      location,
+      description,
+      time: new Date().toLocaleString(),
+      image: document.querySelector("input[type=file]").files[0]
+      ? URL.createObjectURL(document.querySelector("input[type=file]").files[0])
+      : null,
+    };
 
     // Fetch existing reports from localStorage
     const storedReports = JSON.parse(localStorage.getItem("weatherReports")) || [];
