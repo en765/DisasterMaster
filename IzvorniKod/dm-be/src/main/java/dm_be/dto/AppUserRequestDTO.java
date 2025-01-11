@@ -6,6 +6,8 @@ public class AppUserRequestDTO {
     private String email;
     private Long roleId;
 
+    public AppUserRequestDTO() {}
+
     public String getUsername() {
         return username;
     }
