@@ -1,39 +1,44 @@
 package dm_be.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@Configuration
+import java.util.Arrays;
+
 @EnableWebSecurity
 public class SecurityConfig {
-
-    @Autowired
-    private CustomOAuth2UserService customOAuth2UserService;
-
-    @Autowired
-    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-            .headers().frameOptions().disable()
-            .and()
-            .authorizeHttpRequests()
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/users/**").permitAll()
-                .anyRequest().authenticated()
-            .and()
-            .oauth2Login()
-                .userInfoEndpoint()
-                    .userService(customOAuth2UserService)
-                .and()
-                .successHandler(oAuth2LoginSuccessHandler);
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/login**", "/oauth2/**", "/error") // Disable CSRF for OAuth2 and error pages
+                )
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/", "/login**", "/error").permitAll() // Allow access to these paths
+                        .anyRequest().authenticated() // All other paths need authentication
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/auth/oauth2/success", true)   // Redirect to the front-end after successful login
+                        .failureUrl("/login?error=true")    // Redirect to the login page on failure
+                );
 
         return http.build();
+
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("https://disastermaster.onrender.com/", "http://localhost:3000"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
