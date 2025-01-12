@@ -25,7 +25,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests()
-            .requestMatchers("/", "/login-success", "/h2-console/**", "/users/**").authenticated()
+            .requestMatchers("/login-success", "/h2-console/**", "/users/**").authenticated()
             .anyRequest().authenticated()
             .and()
             .oauth2Login().defaultSuccessUrl("/login-success", true);
