@@ -1,4 +1,4 @@
-// LoginForm.jsx
+// Login.jsx
 import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import "./Login.css";
@@ -24,67 +24,47 @@ export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
     }
   };
 
-  const handleGoogleLoginSuccess = async (response) => {
-    console.log("Google login successful:", response);
-    const token = response.credential;
-    try {
-      const res = await fetch("http://localhost:8080/oauth2/success", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await res.text();
-      console.log("Google OAuth Response:", data);
-      alert(`Google Login Successful! Welcome, ${data}`);
-      onLoginSuccess(); // Trigger login state change
-    } catch (error) {
-      console.error("Error during Google OAuth login:", error);
-    }
-  };
-
-  const handleGoogleLoginError = (error) => {
-    console.error("Google login error:", error);
-    alert("Google Login Failed!");
+  // Redirect user to the backend for Google login
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
   };
 
   return (
-      <div className="loginForm">
-        <form onSubmit={handleSubmit}>
-          <div className="username-login">
-            <label>Username:</label>
-            <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-            />
-          </div>
-          <div className="password-login">
-            <label>Password:</label>
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            />
-          </div>
-          <div className="button-container">
-            <button className="submit-login" type="submit">
-              Login
-            </button>
-            <button onClick={handleLoginClose} className="close-button">
-              Close
-            </button>
-          </div>
-        </form>
-
-        <div className="google-login-button">
-          <GoogleLogin
-              onSuccess={handleGoogleLoginSuccess}
-              onError={handleGoogleLoginError}
+    <div className="loginForm">
+      <form onSubmit={handleSubmit}>
+        <div className="username-login">
+          <label>Username:</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
+        <div className="password-login">
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="button-container">
+          <button className="submit-login" type="submit">
+            Login
+          </button>
+          <button onClick={handleLoginClose} className="close-button">
+            Close
+          </button>
+        </div>
+      </form>
+
+      <div className="google-login-button">
+        <button onClick={handleGoogleLogin} className="google-button">
+          Login with Google
+        </button>
       </div>
+    </div>
   );
 }

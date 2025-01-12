@@ -2,6 +2,7 @@ package dm_be.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
@@ -12,6 +13,7 @@ import dm_be.domain.AppUser;
 import dm_be.domain.Role;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class OAuth2Controller {
 
     @Autowired
@@ -40,7 +42,7 @@ public class OAuth2Controller {
             appUserRepository.save(newUser);
         }
 
-        return "Login successful! Welcome " + userName;
+        return userName;
     }
 
     @GetMapping("/")
