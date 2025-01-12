@@ -10,7 +10,10 @@ import dm_be.service.AppUserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +46,7 @@ public class AppUserServiceImpl implements AppUserService {
         AppUser appUser = new AppUser();
         appUser.setUsername(appUserRequestDTO.getUsername());
         appUser.setEmail(appUserRequestDTO.getEmail());
-        appUser.setPassword(appUserRequestDTO.getPassword()); // Password should be hashed
+        appUser.setPassword("");        
         appUser.setRole(role);
 
         return appUserRepository.save(appUser);
