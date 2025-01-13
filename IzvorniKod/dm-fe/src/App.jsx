@@ -40,7 +40,7 @@ function App() {
   const handleLoginSuccess = async () => {
     try {
       const response = await fetch("http://localhost:8080/login-success", {
-        method: "POST",
+        method: "GET",
         credentials: "include", // Ensure cookies are sent with the request
       });
 
