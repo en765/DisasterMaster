@@ -8,7 +8,9 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 function Header({ menuOpen, setMenuOpen, onLoginOpen, isLoggedIn, onLogout }) {
     return (
         <header className="header">
-            <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}></button>
+            <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>
+            ☰
+            </button>
 
             <Link to="/" className="title-link">
                 <h1 className="title">DisasterMaster</h1>
