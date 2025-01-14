@@ -13,6 +13,7 @@ import LoginForm from "./components/Login/Login.jsx";
 import SafetyMeasures from "./components/SafetyMeasures/SafetyMeasures.jsx";
 import NearestShelters from "./components/NearestShelters/NearestShelters.jsx";
 import AvailableResources from "./components/AvailableResources/AvailableResources.jsx";
+import SubscribeModal from "./components/SubscribeModal/SubscribeModal.jsx";
 import "./App.css";
 
 const clientId = "800763204372-6hekpah0bsrb62mhp0oi16522ihbpi0b.apps.googleusercontent.com";
@@ -23,6 +24,7 @@ function App() {
     const [reportType, setReportType] = useState(null);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+    const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
 
     //const { Pool } = pkg;
     //const pool = new Pool({ connectionString: ProcessingInstruction.env.DATABSE_URL });
@@ -53,6 +55,16 @@ function App() {
         setMenuOpen(false);
     };
 
+    // Funkcija za otvaranje Subscribe modala
+    const openSubscribeModal = () => {
+        setIsSubscribeOpen(true);
+    };
+  
+    // Funkcija za zatvaranje Subscribe modala
+    const closeSubscribeModal = () => {
+        setIsSubscribeOpen(false);
+    };
+
     return (
         <GoogleOAuthProvider clientId={clientId}>
             <Router>
@@ -75,6 +87,8 @@ function App() {
                         </div>
                     )}
 
+                    {isSubscribeOpen && <SubscribeModal onClose={closeSubscribeModal} />}
+
                     <Routes>
                         <Route
                             path="/"
@@ -90,10 +104,12 @@ function App() {
                                             closeReportForm={closeReportForm}
                                         />
                                     )}
-                                    <BottomButtons setAddReportOpen={setAddReportOpen} />
+                                    <BottomButtons setAddReportOpen={setAddReportOpen}
+                                    openSubscribeModal={openSubscribeModal} />
                                 </div>
                             }
                         />
+
                         <Route path="/safety-measures" element={<SafetyMeasures menuOpen={menuOpen} setMenuOpen={setMenuOpen} />} />
                         <Route path="/nearest-shelters" element={<NearestShelters menuOpen={menuOpen} setMenuOpen={setMenuOpen} />} />
                         <Route path="/available-resources" element={<AvailableResources menuOpen={menuOpen} setMenuOpen={setMenuOpen} />} />

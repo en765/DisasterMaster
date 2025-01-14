@@ -4,22 +4,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
-function BottomButtons({ setAddReportOpen }) {
-
+function BottomButtons({ setAddReportOpen, openSubscribeModal }) { // Dodali smo openSubscribeModal kao prop
   const appVersion = "1.0.0";
 
   const openTermsOfUse = () => {
-    window.open("/terms-of-use.pdf", "_blank")
-  }
+    window.open("/terms-of-use.pdf", "_blank");
+  };
 
   const openUserGuide = () => {
-    window.open("/user-guide.pdf", "_blank")
-  }
+    window.open("/user-guide.pdf", "_blank");
+  };
 
   return (
     <div className="bottom-buttons">
       <div className="left-buttons">
-        <button className="subscribe-button">
+        <button 
+          className="subscribe-button" 
+          onClick={openSubscribeModal} 
+        >
           <FontAwesomeIcon icon={faBell} style={{ marginRight: '8px' }} />
           Subscribe
         </button>
@@ -45,7 +47,6 @@ function BottomButtons({ setAddReportOpen }) {
       >
         + Add new weather reports
       </button>
-
     </div>
   );
 }
