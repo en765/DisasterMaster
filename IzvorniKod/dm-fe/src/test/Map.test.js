@@ -6,7 +6,7 @@ const assert = require('chai').assert;
 
     try {
         // Step 1: Maximize the browser window (make it full screen)
-        await driver.manage().window().maximize();  // This maximizes the browser window
+        await driver.manage().window().maximize();
         console.log('Browser window maximized to full screen.');
 
         // Step 2: Load the webpage where your React app is running
@@ -17,58 +17,48 @@ const assert = require('chai').assert;
         assert.isNotNull(mapContainer, 'Map is displayed');
         console.log('Map is displayed.');
 
-        // Step 4: Open the "Add Weather Report" options
-        const addWeatherReportsButton = await driver.wait(until.elementLocated(By.css('.add-report-button')), 10000);
-        await addWeatherReportsButton.click();  // Click to open the weather report options
-        console.log('AddWeatherReports button clicked, list of reports shown.');
+        // Step 4: Test valid location search
+        const searchInput = await driver.findElement(By.css('.search-bar input'));
+        const searchButton = await driver.findElement(By.css('.search-bar button'));
 
-        // Step 5: Select Earthquake (or any other disaster)
-        const earthquakeIcon = await driver.wait(until.elementLocated(By.xpath("//li[text()='🌍 Earthquake']")), 10000);
-        await earthquakeIcon.click();  // Click on Earthquake
-        console.log('Earthquake icon clicked.');
+        // Step 4.1: Fill in valid location and click the search button
+        await searchInput.sendKeys('London');
+        await searchButton.click();
+        console.log('Search button clicked with a valid location.');
 
-        // Step 6: Wait for the WeatherReportForm to load (check if form is visible)
-        const formVisible = await driver.wait(until.elementLocated(By.className('weather-report-form')), 10000);
-        console.log('Weather report form loaded.');
+        // Step 4.2: Wait for the map to be centered on the valid location (London)
+        await driver.wait(until.elementLocated(By.css('#homepage-map')), 10000);
+        console.log('Map should now be centered on London.');
 
-        // Step 7: Simulate clicking on the map to select a location
-        const mapElement = await driver.findElement(By.id('map'));
-        console.log('Waiting for map interaction...');
-        await driver.actions().move({ origin: mapElement }).click().perform();  // Click on the map
+        // Step 5: Test invalid location search
+        await searchInput.clear();
+        await searchInput.sendKeys('InvalidLocation');
+        await searchButton.click();
+        console.log('Search button clicked with an invalid location.');
 
-        // Step 8: Wait for the location to update in the form
-        const locationInputField = await driver.wait(until.elementLocated(By.xpath("//input[@placeholder='Enter location']")), 10000);
+        // Step 5.1: Wait for the alert (alert should appear with the error message for invalid location)
+        let alert = await driver.wait(until.alertIsPresent(), 10000);
+        const alertText = await alert.getText();
+        assert.equal(alertText, 'Location not found!', 'Alert message is correct for invalid location.');
+        console.log('Alert for invalid location shown correctly.');
 
-        // Wait for the location field to be populated with location data
-        let locationValue;
-        await driver.wait(async function () {
-            locationValue = await locationInputField.getAttribute('value');
-            return locationValue && locationValue.includes(',');
-        }, 10000);
+        // Step 5.2: Click the "OK" button on the alert to dismiss it and return to the main page
+        await alert.accept();
+        console.log('Alert dismissed successfully.');
 
-        console.log('Location after clicking on map:', locationValue);
+        // Step 6: Test empty search and clicking search button
+        await searchInput.clear();
+        await searchButton.click();
+        console.log('Search button clicked with an empty search bar.');
 
-        // Step 9: Verify the location is set correctly (example: assert it contains 'London' or another location)
-        assert.include(locationValue, 'London', 'Location is correctly set on the map.');
-        console.log('Location verified.');
+        // Wait for map updates after the empty search
+        // Instead of accessing window.map, let's check if the map container has moved or updated
+        await driver.wait(until.elementLocated(By.css('.leaflet-map-pane')), 5000); // Wait for map updates
+        const mapPane = await driver.findElement(By.css('.leaflet-map-pane'));
 
-        // Step 10: Fill out the form
-        await driver.findElement(By.xpath("//textarea[@placeholder='Describe the situation']")).sendKeys('Severe earthquake in London');
-
-        // Step 11: Ensure the Submit button is scrolled into view and clickable
-        const submitButton = await driver.findElement(By.xpath("//button[text()='Submit']"));
-
-        // Ensure the button is scrolled into view before clicking
-        await driver.executeScript('arguments[0].scrollIntoView(true);', submitButton);
-        await driver.sleep(500);  // Adding a short delay to allow for visual updates after scrolling
-
-        // Click the Submit button
-        await submitButton.click();  
-        console.log('Weather report submitted.');
-
-        // Step 12: Wait for the form to be closed and return to the main page
-        await driver.wait(until.elementLocated(By.css('.add-report-button')), 10000);
-        console.log('Returned to the main page after form submission.');
+        // Check if the map pane exists, indicating the map is still there and functional
+        assert.isNotNull(mapPane, 'Map pane exists after empty search.');
+        console.log('Map is still active after empty search.');
 
     } catch (error) {
         console.log('Test failed due to error: ' + error);
