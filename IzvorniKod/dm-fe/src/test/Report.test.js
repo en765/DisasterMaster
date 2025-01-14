@@ -5,7 +5,18 @@ require('geckodriver');
 (async function testLeafletMap() {
     let driver = await new Builder().forBrowser('firefox').build();
 
+    // Define disaster types and corresponding European locations
+    const disasters = [
+        { type: '🌍 Earthquake', locations: ['Lisbon', 'Rome', 'Athens'] },
+        { type: '🔥 Fire', locations: ['Barcelona', 'Naples', 'Paris'] },
+        { type: '🌊 Flood', locations: ['Amsterdam', 'Berlin', 'Paris'] },
+        { type: '🌩️ Storm', locations: ['London', 'Dublin', 'Brussels'] }
+    ];
+
     try {
+        await driver.manage().window().maximize();
+        console.log('Browser window maximized to full screen.');
+
         // Load the webpage where your React app is running
         await driver.get('http://localhost:3000');  // Adjust with your local URL or deploy URL
 
@@ -13,98 +24,58 @@ require('geckodriver');
         const mapDisplayed = await driver.wait(until.elementLocated(By.id('homepage-map')), 10000);
         console.log('Map is displayed:', mapDisplayed != null);
 
-        // Wait for the "AddWeatherReports" button (adjust selector as needed)
-        const addWeatherReportsButton = await driver.wait(until.elementLocated(By.css('.add-report-button')), 10000);
-        await addWeatherReportsButton.click();  // Click to open the weather report options
-        console.log('AddWeatherReports button clicked, list of reports shown.');
+        // Loop through each disaster and its corresponding locations
+        for (let disaster of disasters) {
+            for (let location of disaster.locations) {
+                // 1. Click the "AddWeatherReports" Button
+                const addWeatherReportsButton = await driver.wait(until.elementLocated(By.css('.add-report-button')), 10000);
+                await addWeatherReportsButton.click();  // Click to open the weather report options
+                console.log(`AddWeatherReports button clicked, list of reports shown for ${disaster.type} at ${location}.`);
 
-        // ----------- Test for Earthquake ----------- 
-        // Wait for the Earthquake icon to appear
-        const earthquakeIcon = await driver.wait(until.elementLocated(By.xpath("//li[text()='🌍 Earthquake']")), 10000);
-        console.log('Earthquake icon found.');
-        await earthquakeIcon.click();  // Click on Earthquake
+                // 2. Select the Disaster (e.g., Earthquake)
+                const disasterIcon = await driver.wait(until.elementLocated(By.xpath(`//li[text()='${disaster.type}']`)), 10000);
+                await disasterIcon.click();  // Click on the selected disaster
+                console.log(`${disaster.type} icon selected.`);
 
-        // Wait for the WeatherReportForm to load (check if form is visible)
-        await driver.wait(until.elementLocated(By.className('weather-report-form')), 10000);
-        console.log('Weather report form loaded for Earthquake.');
+                // 3. Wait for the Report Form to load
+                const mainContent = await driver.wait(until.elementLocated(By.className('main-content')), 10000);
+                const weatherReportForm = await mainContent.findElement(By.className('weather-report-form'));
+                console.log('Weather report form loaded for ' + disaster.type);
 
-        // Fill out the form for Earthquake
-        await driver.findElement(By.xpath("//input[@placeholder='Enter location']")).sendKeys('London');
-        await driver.findElement(By.xpath("//textarea[@placeholder='Describe the situation']")).sendKeys('Severe earthquake in London');
-        await driver.findElement(By.xpath("//button[text()='Submit']")).click();  // Submit the form
+                // 4. Find the form-content div inside the report form, and then the <form> element inside it
+                const formContent = await weatherReportForm.findElement(By.className('form-content'));
+                const form = await formContent.findElement(By.tagName('form'));
+                console.log('Form element located inside form-content.');
 
-        // Wait for the form to be closed and return to the main page
-        await driver.wait(until.elementLocated(By.css('.add-report-button')), 10000);
-        console.log('Returned to the main page.');
+                // 5. Find the Search Bar (input element with placeholder "Enter location")
+                const searchInput = await form.findElement(By.xpath(".//input[@placeholder='Enter location']"));
+                await searchInput.clear();  // Clear the input field
+                await searchInput.sendKeys(location);  // Type the location into the search bar
+                console.log(`Location entered in search bar: ${location}`);
 
-        // ----------- Test for Fire ----------- 
-        // Click the "AddWeatherReports" button again
-        await addWeatherReportsButton.click();  // Open the weather report options
-        console.log('AddWeatherReports button clicked again, list of reports shown.');
+                // 6. Click the search button inside the form
+                const searchButton = await form.findElement(By.xpath(".//button[text()='Search']"));
+                
+                // Ensure the search button is visible and clickable
+                await driver.executeScript("arguments[0].scrollIntoView();", searchButton);
+                await searchButton.click();
+                console.log('Search button clicked, location set to ' + location + '.');
 
-        // Wait for the Fire icon and click it
-        const fireIcon = await driver.wait(until.elementLocated(By.xpath("//li[text()='🔥 Fire']")), 10000);
-        console.log('Fire icon found.');
-        await fireIcon.click();  // Click on Fire
+                // Wait for location to be validated (additional delay, if needed)
+                await driver.sleep(2000);  // Wait to ensure the location has been correctly selected
 
-        // Wait for the WeatherReportForm to load (check if form is visible)
-        await driver.wait(until.elementLocated(By.className('weather-report-form')), 10000);
-        console.log('Weather report form loaded for Fire.');
+                // 7. Fill out the rest of the form (e.g., description)
+                await form.findElement(By.xpath(".//textarea[@placeholder='Describe the situation']")).sendKeys(`Severe ${disaster.type.toLowerCase()} in ${location}`);
+                console.log(`Description added to the form for ${disaster.type} in ${location}.`);
 
-        // Fill out the form for Fire
-        await driver.findElement(By.xpath("//input[@placeholder='Enter location']")).sendKeys('California');
-        await driver.findElement(By.xpath("//textarea[@placeholder='Describe the situation']")).sendKeys('Massive fire in California');
-        await driver.findElement(By.xpath("//button[text()='Submit']")).click();  // Submit the form
+                // 8. Submit the Report Form
+                await form.findElement(By.xpath(".//button[text()='Submit']")).click();
+                console.log(`Report form submitted for ${disaster.type} in ${location}.`);
 
-        // Wait for the form to be closed and return to the main page
-        await driver.wait(until.elementLocated(By.css('.add-report-button')), 10000);
-        console.log('Returned to the main page.');
-
-        // ----------- Test for Flood ----------- 
-        // Click the "AddWeatherReports" button again
-        await addWeatherReportsButton.click();  // Open the weather report options
-        console.log('AddWeatherReports button clicked again, list of reports shown.');
-
-        // Wait for the Flood icon and click it
-        const floodIcon = await driver.wait(until.elementLocated(By.xpath("//li[text()='🌊 Flood']")), 10000);
-        console.log('Flood icon found.');
-        await floodIcon.click();  // Click on Flood
-
-        // Wait for the WeatherReportForm to load (check if form is visible)
-        await driver.wait(until.elementLocated(By.className('weather-report-form')), 10000);
-        console.log('Weather report form loaded for Flood.');
-
-        // Fill out the form for Flood
-        await driver.findElement(By.xpath("//input[@placeholder='Enter location']")).sendKeys('Miami');
-        await driver.findElement(By.xpath("//textarea[@placeholder='Describe the situation']")).sendKeys('Severe flooding in Miami');
-        await driver.findElement(By.xpath("//button[text()='Submit']")).click();  // Submit the form
-
-        // Wait for the form to be closed and return to the main page
-        await driver.wait(until.elementLocated(By.css('.add-report-button')), 10000);
-        console.log('Returned to the main page.');
-
-        // ----------- Test for Storm ----------- 
-        // Click the "AddWeatherReports" button again
-        await addWeatherReportsButton.click();  // Open the weather report options
-        console.log('AddWeatherReports button clicked again, list of reports shown.');
-
-        // Wait for the Storm icon and click it
-        const stormIcon = await driver.wait(until.elementLocated(By.xpath("//li[text()='🌩️ Storm']")), 10000);
-        console.log('Storm icon found.');
-        await stormIcon.click();  // Click on Storm
-
-        // Wait for the WeatherReportForm to load (check if form is visible)
-        await driver.wait(until.elementLocated(By.className('weather-report-form')), 10000);
-        console.log('Weather report form loaded for Storm.');
-
-        // Fill out the form for Storm
-        await driver.findElement(By.xpath("//input[@placeholder='Enter location']")).sendKeys('New York');
-        await driver.findElement(By.xpath("//textarea[@placeholder='Describe the situation']")).sendKeys('Severe storm in New York');
-        await driver.findElement(By.xpath("//button[text()='Submit']")).click();  // Submit the form
-
-        // Wait for the form to be closed and return to the main page
-        await driver.wait(until.elementLocated(By.css('.add-report-button')), 10000);
-        console.log('Returned to the main page.');
+                // Wait for a few seconds before moving to the next disaster/location pair
+                await driver.sleep(3000);
+            }
+        }
 
     } catch (error) {
         console.log('Test failed due to error: ' + error);
