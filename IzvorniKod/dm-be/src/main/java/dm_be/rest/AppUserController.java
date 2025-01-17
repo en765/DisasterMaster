@@ -25,7 +25,7 @@ public class AppUserController {
     private AppUserService appUserService;
 
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("")
+    @GetMapping("/")
     public List<AppUser> getAllUsers() {
         return appUserService.getAllUsers();
     }
