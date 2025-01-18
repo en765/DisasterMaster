@@ -11,7 +11,7 @@ FROM amazoncorretto:17-alpine3.19
 # Set the working directory in the container
 WORKDIR /dm-be
 # Copy the built JAR file from the previous stage to the container
-COPY --from=build /dm-be/target/disastermaster-0.0.1-SNAPSHOT.jar disastermaster.jar
+COPY --from=builder target/*.jar /app.jar
 EXPOSE 8080
 # Set the command to run the application
-CMD ["java", "-jar", "disastermaster.jar"]
+CMD ["java", "-jar", "app.jar"]
