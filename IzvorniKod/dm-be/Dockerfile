@@ -11,7 +11,7 @@ FROM amazoncorretto:17-alpine3.19
 # Set the working directory in the container
 WORKDIR /dm-be
 # Copy the built JAR file from the previous stage to the container
-COPY --from=builder target/*.jar /app.jar
+COPY --from=build target/*.jar /app.jar
 EXPOSE 8080
 # Set the command to run the application
 CMD ["java", "-jar", "app.jar"]
