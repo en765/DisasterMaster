@@ -40,13 +40,14 @@ public class ReportController {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000") // Frontend URL
+                        .allowedOrigins("https://disastermaster.onrender.com") // Frontend URL
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
         };
     }
-    
+
     @PostMapping("/add")
     public ResponseEntity<Report> addReport(@RequestBody ReportRequestDTO reportDTO) {
         try {
