@@ -68,7 +68,6 @@ const handleSubmit = async (event) => {
   
   // Kreiranje objekta za slanje na backend
   const report = {
-    userId: 1, // Primer korisničkog ID-a (možete ga dinamički popuniti)
     disasterType: type.toUpperCase(), // Pretpostavljamo da je `type` u odgovarajućem formatu
     location,
     description,
