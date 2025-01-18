@@ -14,4 +14,4 @@ WORKDIR /dm-be
 COPY --from=build /dm-be/target/backend-0.0.1.jar .
 EXPOSE 8080
 # Set the command to run the application
-CMD ["java", "-jar", "backend-0.0.1.jar"]
+CMD ["java", "-jar", "disastermaster.jar"]
