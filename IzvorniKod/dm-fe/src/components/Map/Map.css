@@ -5,16 +5,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto; /* Horizontally centers the container */
+  margin-top: -100px; /* Horizontally centers the container */
   text-align: center;
   position: relative; /* Ensures no external elements affect its layout */
 }
 
 #homepage-map {
-  height: 400px; /* Adjusted height for smaller map */
+  height: 450px; /* Adjusted height for smaller map */
   width: 50%; /* Adjusted width to be responsive */
   border: 1px solid #ccc;
   border-radius: 8px;
+
 }
 
 .search-bar {
@@ -69,4 +70,18 @@
   font-size: 24px;
   text-align: center;
   line-height: 30px;
+}
+
+@media (max-width: 480px) {
+  .map-container {
+    width: 50%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -60px; /* Horizontally centers the container */
+    text-align: center;
+    position: relative; /* Ensures no external elements affect its layout */
+  }
 }

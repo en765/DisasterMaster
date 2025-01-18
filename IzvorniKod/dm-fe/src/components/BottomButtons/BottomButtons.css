@@ -12,6 +12,9 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
 }
 
 .subscribe-button,
@@ -30,6 +33,10 @@
     border: 1px solid #333;
     border-radius: 15px;
     font-size: 20px;
+    height: 70px;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
 }
 
 .bottom-info {
@@ -39,7 +46,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    position: absolute;
+    bottom: 10px;
+    left: 43%;
 }
 
 .bottom-info p {
@@ -70,3 +79,66 @@
     background-color: #7f9eced1;
 }
 
+@media (max-width: 480px) {
+    .add-report-button {
+        background-color: white;
+        border: 1px solid #333;
+        border-radius: 15px;
+        font-size: 17px;
+        height: 70px;
+        position: absolute;
+        right: 27%;
+        bottom: 220px;
+        padding: 5px 10px;
+    }
+
+    .bottom-info {
+        margin-top: 30px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 10px;
+        left: 37%;
+    }
+
+    .bottom-info p {
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 7px;
+    }
+
+    .terms-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 11px;
+    }
+
+    .left-buttons {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        gap: 10px;
+        position: absolute;
+        left: 27%;
+        bottom: 120px;
+    }
+
+    .subscribe-button,
+    .emergency-call-button {
+    font-family: "Gill Sans", sans-serif;
+    padding: 10px 0px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+}

@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   padding: 0;
@@ -90,9 +89,6 @@ footer {
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
 
-  .left-buttons {
-    display: none; /* Sakrij left buttons */
-  }
   
   .map-container {
     width: 90%;
@@ -115,4 +111,5 @@ footer {
     font-size: 14px;
     padding: 8px 16px;
   }
+
 }
