@@ -3,7 +3,7 @@ FROM maven:3.9.6-amazoncorretto-17 AS build
 # Set the working directory in the container
 WORKDIR /dm-be
 # Copy the pom.xml and the project files to the container
-COPY IzvorniKod\dm-be\pom.xml .
+COPY IzvorniKod/dm-be/pom.xml .
 # Build the application using Maven
 RUN mvn clean package
 # Use an official OpenJDK image as the base image
