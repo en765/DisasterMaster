@@ -1,18 +1,12 @@
-# Use an official Maven image as the base image
-FROM maven:3.9.6-amazoncorretto-17 AS build
-# Set the working directory in the container
-WORKDIR /dm-be
-# Copy the pom.xml and the project files to the container
-COPY pom.xml .
-COPY src ./src
-# Build the application using Maven
+FROM maven:3.9.6-openjdk AS build
+
+COPY . .
+
 RUN mvn clean package -DskipTests
-# Use an official OpenJDK image as the base image
-FROM amazoncorretto:17-alpine3.19
-# Set the working directory in the container
-WORKDIR /dm-be
-# Copy the built JAR file from the previous stage to the container
-COPY --from=build /dm-be/target/backend-0.0.1.jar .
+
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=build /target/dm-be-0.0.1-SNAPSHOT.jar /disastermaster.jar
+
 EXPOSE 8080
-# Set the command to run the application
-CMD ["java", "-jar", "backend-0.0.1.jar"]
+
+ENTRYPOINT [ "java", "-jar", "/disastermaster.jar" ]
