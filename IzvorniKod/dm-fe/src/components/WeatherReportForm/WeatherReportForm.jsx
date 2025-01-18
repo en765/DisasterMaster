@@ -63,31 +63,44 @@ function WeatherReportForm({ type, closeReportForm }) {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const report = { 
-      type,
-      location,
-      description,
-      time: new Date().toLocaleString(),
-      image: document.querySelector("input[type=file]").files[0]
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  
+  // Kreiranje objekta za slanje na backend
+  const report = {
+    userId: 1, // Primer korisničkog ID-a (možete ga dinamički popuniti)
+    disasterType: type.toUpperCase(), // Pretpostavljamo da je `type` u odgovarajućem formatu
+    location,
+    description,
+    createdAt: new Date().toISOString(),
+    photo: document.querySelector("input[type=file]").files[0]
       ? URL.createObjectURL(document.querySelector("input[type=file]").files[0])
       : null,
-    };
-
-    // Fetch existing reports from localStorage
-    const storedReports = JSON.parse(localStorage.getItem("weatherReports")) || [];
-
-    // Add the new report to the list
-    const updatedReports = [...storedReports, report];
-
-    // Store updated reports back into localStorage
-    localStorage.setItem("weatherReports", JSON.stringify(updatedReports));
-
-    console.log("Weather report saved to localStorage:", report);
-    closeReportForm();
   };
+  
+  try {
+    // Konfiguracija HTTP POST zahteva
+    const response = await fetch("http://localhost:8080/reports/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(report),
+    });
+  
+    if (response.ok) {
+      const createdReport = await response.json();
+      console.log("Kreiran report:", createdReport);
+      closeReportForm(); // Zatvara formu nakon uspešnog kreiranja
+    } else {
+      console.error("Greška prilikom kreiranja reporta:", response.status);
+      alert("Greška prilikom kreiranja reporta. Pokušajte ponovo.");
+    }
+  } catch (error) {
+    console.error("Greška u komunikaciji sa serverom:", error);
+    alert("Došlo je do greške. Pokušajte ponovo.");
+  }
+};
 
   return (
       <div className="weather-report-form">
