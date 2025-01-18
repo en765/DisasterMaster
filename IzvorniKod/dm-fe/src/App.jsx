@@ -67,10 +67,27 @@ function App() {
     setMenuOpen(false);
   };
 
-  // Check if the user is already logged in when the app starts
   useEffect(() => {
-    handleLoginSuccess();
-  }, []);
+    // Check if the user is already logged in
+    const checkLogin = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/login-success", {
+          method: "GET",
+          credentials: "include",
+        });
+        if (response.ok) {
+          const userName = await response.text();
+          setIsLoggedIn(true);
+          setUserName(userName);
+        }
+      } catch (error) {
+        console.error("Error checking login status:", error);
+      }
+    };
+
+    checkLogin();
+  }, []); // Runs only once when the component mounts
+
 
   return (
     <GoogleOAuthProvider clientId={clientId}>

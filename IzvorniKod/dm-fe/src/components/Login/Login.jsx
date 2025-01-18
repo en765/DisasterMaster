@@ -1,6 +1,4 @@
-// Login.jsx
 import React, { useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
 import "./Login.css";
 
 export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
@@ -15,18 +13,60 @@ export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
-      const data = await response.text();
-      console.log("Traditional Login Response:", data);
-      alert(data);
-      onLoginSuccess(); // Trigger login state change
+
+      if (response.ok) {
+        const userName = await fetchUserName();
+        alert(`Welcome, ${userName}!`);
+        onLoginSuccess(); // Notify the parent of login success
+      } else {
+        const error = await response.text();
+        alert(error);
+      }
     } catch (error) {
-      console.error("Error during traditional login:", error);
+      console.error("Error during login:", error);
     }
   };
 
-  // Redirect user to the backend for Google login
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    const popup = window.open(
+      "http://localhost:8080/oauth2/authorization/google",
+      "GoogleLogin",
+      "width=600,height=700"
+    );
+
+    // Poll the popup to check for closure
+    const interval = setInterval(async () => {
+      try {
+        if (popup.closed) {
+          clearInterval(interval); // Stop polling when popup is closed
+          const userName = await fetchUserName();
+          if (userName) {
+            alert(`Welcome, ${userName}!`);
+            onLoginSuccess(); // Notify the parent of login success
+          }
+        }
+      } catch (err) {
+        console.error("Error during popup polling:", err);
+      }
+    }, 1000);
+  };
+
+  const fetchUserName = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/login-success", {
+        method: "GET",
+        credentials: "include", // Ensure cookies are sent with the request
+      });
+      if (response.ok) {
+        const userName = await response.text(); // Plain string response
+        return userName;
+      } else {
+        console.error("Failed to fetch user details");
+      }
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+    return null;
   };
 
   return (
