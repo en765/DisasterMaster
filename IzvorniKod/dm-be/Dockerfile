@@ -8,8 +8,8 @@ COPY . .
 RUN mvn clean package -DskipTests
 # Use an official OpenJDK image as the base image
 FROM amazoncorretto:17-alpine3.19
-# Set the working directory in the container
-WORKDIR /dm-be .
+
+
 # Copy the built JAR file from the previous stage to the container
 COPY --from=build /dm-be/target/backend-0.0.1.jar .
 EXPOSE 8080
