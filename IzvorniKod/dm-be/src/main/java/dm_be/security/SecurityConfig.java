@@ -1,31 +1,37 @@
 package dm_be.security;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@Configuration
+import java.util.Arrays;
+
+@EnableWebSecurity
 public class SecurityConfig {
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            // Onemogućavanje CSRF za H2 konzolu i javne rute
-            .csrf().disable()
-            // Omogućavanje frame options za H2 konzolu
-            .headers().frameOptions().disable()
-            .and()
             .authorizeHttpRequests()
-                // Dopuštenje pristupa H2 konzoli
-                .requestMatchers("/h2-console/**").permitAll()
-                // Dopuštanje registracije bez autentifikacije
-                .requestMatchers("/users/**").permitAll()
-                // Sve ostalo zahtijeva autentifikaciju
-                .anyRequest().authenticated()
+            .requestMatchers("/login-success", "/h2-console/**", "/users/**").authenticated()
+            .anyRequest().authenticated()
             .and()
-            .formLogin(); // Omogućavanje forme za login (ako je potrebno)
+            .oauth2Login().defaultSuccessUrl("/login-success", true);
 
         return http.build();
+
     }
+
 }
