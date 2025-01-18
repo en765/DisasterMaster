@@ -7,8 +7,14 @@ import dm_be.domain.Role;
 import dm_be.dto.AppUserRequestDTO;
 import dm_be.service.AppUserService;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +36,6 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public AppUser addAppUser(AppUserRequestDTO appUserRequestDTO) {
-        // Validacija podataka
         Optional<Role> roleOptional = roleRepository.findByRoleId(appUserRequestDTO.getRoleId());
         if (roleOptional.isEmpty()) {
             throw new IllegalArgumentException("Role not found: " + appUserRequestDTO.getRoleId());
@@ -38,13 +43,19 @@ public class AppUserServiceImpl implements AppUserService {
 
         Role role = roleOptional.get();
         
-        // Kreiranje novog korisnika
         AppUser appUser = new AppUser();
         appUser.setUsername(appUserRequestDTO.getUsername());
         appUser.setEmail(appUserRequestDTO.getEmail());
-        appUser.setPassword(appUserRequestDTO.getPassword()); // Lozinka je hashirana
+        appUser.setPassword("");        
         appUser.setRole(role);
 
         return appUserRepository.save(appUser);
     }
+
+    @Override
+    public AppUser getUserByEmail(String email) {
+        return appUserRepository.findByEmail(email);
+    }
+
+    
 }
