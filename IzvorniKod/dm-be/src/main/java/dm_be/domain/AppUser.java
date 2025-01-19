@@ -3,10 +3,6 @@ package dm_be.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.*;
-
-import org.hibernate.annotations.JoinColumnOrFormula;
-
 @Entity
 @Table(name="users")
 public class AppUser {
@@ -28,7 +24,11 @@ public class AppUser {
     @JoinColumn(name="role_id")
     private Role role;
 
-    public AppUser () {};
+    // Dodan je atribut isSubscribed, inicijalno postavljen na false
+    @NotNull
+    private boolean isSubscribed = false;
+
+    public AppUser() {}
 
     public Long getUserId() {
         return userId;
@@ -36,14 +36,6 @@ public class AppUser {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public String getUsername() {
@@ -70,13 +62,31 @@ public class AppUser {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public boolean isSubscribed() {
+        return isSubscribed;
+    }
+
+    public void setSubscribed(boolean isSubscribed) {
+        this.isSubscribed = isSubscribed;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "userId='" + userId + '\'' +
-                ", role='" + role + '\'' +
+        return "AppUser{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
+                ", isSubscribed=" + isSubscribed +
                 '}';
     }
 }

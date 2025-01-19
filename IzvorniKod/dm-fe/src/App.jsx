@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState, useEffect } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -21,8 +20,8 @@ function App() {
   const [addReportOpen, setAddReportOpen] = useState(false);
   const [reportType, setReportType] = useState(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
-  const [userName, setUserName] = useState(""); // Store user name
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
 
   const openReportForm = (type) => {
     setReportType(type);
@@ -34,14 +33,14 @@ function App() {
   };
 
   const handleLoginOpen = () => {
-    setIsLoginOpen(true); // Open the login overlay
+    setIsLoginOpen(true);
   };
 
   const handleLoginSuccess = async () => {
     try {
       const response = await fetch("http://localhost:8080/login-success", {
         method: "GET",
-        credentials: "include", // Ensure cookies are sent with the request
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -50,8 +49,8 @@ function App() {
 
       const userName = await response.text();
       setIsLoggedIn(true);
-      setUserName(userName); // Set user name after login
-      setIsLoginOpen(false); // Close login overlay
+      setUserName(userName);
+      setIsLoginOpen(false);
     } catch (error) {
       console.error("Error fetching user details:", error);
       setIsLoggedIn(false);
@@ -59,7 +58,7 @@ function App() {
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Set login state to false
+    setIsLoggedIn(false);
     setUserName("");
   };
 
@@ -68,7 +67,6 @@ function App() {
   };
 
   useEffect(() => {
-    // Check if the user is already logged in
     const checkLogin = async () => {
       try {
         const response = await fetch("http://localhost:8080/login-success", {
@@ -86,73 +84,75 @@ function App() {
     };
 
     checkLogin();
-  }, []); // Runs only once when the component mounts
-
+  }, []);
 
   return (
-    <GoogleOAuthProvider clientId={clientId}>
-      <Router>
-        <div className="app">
-          <Header
-            menuOpen={menuOpen}
-            setMenuOpen={setMenuOpen}
-            onLoginOpen={handleLoginOpen}
-            isLoggedIn={isLoggedIn} // Pass down login state
-            onLogout={handleLogout} // Pass down logout handler
-            userName={userName} // Pass down logged-in user's name
-          />
-          {menuOpen && <Menu closeMenu={closeMenu} />}
+      <GoogleOAuthProvider clientId={clientId}>
+        <Router>
+          <div className="app">
+            <Header
+                menuOpen={menuOpen}
+                setMenuOpen={setMenuOpen}
+                onLoginOpen={handleLoginOpen}
+                isLoggedIn={isLoggedIn}
+                onLogout={handleLogout}
+                userName={userName}
+            />
+            {menuOpen && <Menu closeMenu={closeMenu} />}
 
-          {isLoginOpen && (
-            <div className="login-overlay">
-              <LoginForm
-                handleLoginClose={() => setIsLoginOpen(false)}
-                onLoginSuccess={handleLoginSuccess}
-              />
-            </div>
-          )}
-
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="main-content">
-                  <Map />
-                  {addReportOpen && (
-                    <AddWeatherReports openReportForm={openReportForm} />
-                  )}
-                  {reportType && (
-                    <WeatherReportForm
-                      type={reportType}
-                      closeReportForm={closeReportForm}
-                    />
-                  )}
-                  <BottomButtons setAddReportOpen={setAddReportOpen} />
+            {isLoginOpen && (
+                <div className="login-overlay">
+                  <LoginForm
+                      handleLoginClose={() => setIsLoginOpen(false)}
+                      onLoginSuccess={handleLoginSuccess}
+                  />
                 </div>
-              }
-            />
-            <Route
-              path="/safety-measures"
-              element={
-                <SafetyMeasures menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-              }
-            />
-            <Route
-              path="/nearest-shelters"
-              element={
-                <NearestShelters menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-              }
-            />
-            <Route
-              path="/available-resources"
-              element={
-                <AvailableResources menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-              }
-            />
-          </Routes>
-        </div>
-      </Router>
-    </GoogleOAuthProvider>
+            )}
+
+            <Routes>
+              <Route
+                  path="/"
+                  element={
+                    <div className="main-content">
+                      <Map />
+                      {addReportOpen && (
+                          <AddWeatherReports openReportForm={openReportForm} />
+                      )}
+                      {reportType && (
+                          <WeatherReportForm
+                              type={reportType}
+                              closeReportForm={closeReportForm}
+                          />
+                      )}
+                      <BottomButtons
+                          setAddReportOpen={setAddReportOpen}
+                          isLoggedIn={isLoggedIn} // Pass login state
+                      />
+                    </div>
+                  }
+              />
+              <Route
+                  path="/safety-measures"
+                  element={
+                    <SafetyMeasures menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+                  }
+              />
+              <Route
+                  path="/nearest-shelters"
+                  element={
+                    <NearestShelters menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+                  }
+              />
+              <Route
+                  path="/available-resources"
+                  element={
+                    <AvailableResources menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+                  }
+              />
+            </Routes>
+          </div>
+        </Router>
+      </GoogleOAuthProvider>
   );
 }
 
