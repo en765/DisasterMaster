@@ -37,6 +37,7 @@ public class OAuth2Controller {
             newUser.setEmail(userEmail);
             newUser.setUsername(userName);
             newUser.setPassword(""); // Nije potrebno za OAuth2 korisnike
+            newUser.setSubscribed(false);
 
 
             appUserRepository.save(newUser);

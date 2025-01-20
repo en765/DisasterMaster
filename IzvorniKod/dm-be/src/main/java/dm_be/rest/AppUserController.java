@@ -1,26 +1,20 @@
 package dm_be.rest;
 
-import dm_be.service.*;
-import dm_be.domain.*;
+
+import dm_be.service.AppUserService;
+import dm_be.domain.AppUser;
 import dm_be.dto.AppUserRequestDTO;
-
-import java.util.*;
-
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/users")
 public class AppUserController {
-    
+
     @Autowired
     private AppUserService appUserService;
 
@@ -36,5 +30,33 @@ public class AppUserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
+    /**
+     * Endpoint to subscribe a user.
+     * Expects a JSON object with userId:
+     * {
+     *    "userId": 1
+     * }
+     */
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    @PostMapping("/subscribe")
+    public ResponseEntity<?> subscribeUser(@RequestBody SubscribeRequest request) {
+        try {
+            AppUser updatedUser = appUserService.subscribeUser(request.getUserId());
+            return ResponseEntity.ok(updatedUser);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 
+    public static class SubscribeRequest {
+        private Long userId;
+
+        public Long getUserId() {
+            return userId;
+        }
+
+        public void setUserId(Long userId) {
+            this.userId = userId;
+        }
+    }
 }

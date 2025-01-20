@@ -5,6 +5,7 @@ public class AppUserRequestDTO {
     private String password;
     private String email;
     private Long roleId;
+    private Boolean isSubscribed;
 
     public AppUserRequestDTO() {}
 
@@ -36,7 +37,9 @@ public class AppUserRequestDTO {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
+    public void setRoleId(Long roleId) { this.roleId = roleId; }
+
+    public boolean isSubscribed() { return isSubscribed; }
+
+    public void setSubscribed(boolean isSubscribed) { this.isSubscribed = isSubscribed; }
 }

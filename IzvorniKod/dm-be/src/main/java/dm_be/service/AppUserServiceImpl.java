@@ -5,18 +5,9 @@ import dm_be.dao.RoleRepository;
 import dm_be.domain.AppUser;
 import dm_be.domain.Role;
 import dm_be.dto.AppUserRequestDTO;
-import dm_be.service.AppUserService;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,14 +31,14 @@ public class AppUserServiceImpl implements AppUserService {
         if (roleOptional.isEmpty()) {
             throw new IllegalArgumentException("Role not found: " + appUserRequestDTO.getRoleId());
         }
-
         Role role = roleOptional.get();
-        
+
         AppUser appUser = new AppUser();
         appUser.setUsername(appUserRequestDTO.getUsername());
         appUser.setEmail(appUserRequestDTO.getEmail());
-        appUser.setPassword("");        
+        appUser.setPassword("");
         appUser.setRole(role);
+        //appUser.setSubscribed(false);
 
         return appUserRepository.save(appUser);
     }
@@ -57,5 +48,17 @@ public class AppUserServiceImpl implements AppUserService {
         return appUserRepository.findByEmail(email);
     }
 
-    
+    @Override
+    @Transactional
+    public AppUser subscribeUser(Long userId) {
+        System.out.println("subscribeUser called with userId: " + userId);
+        Optional<AppUser> optionalUser = appUserRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            AppUser user = optionalUser.get();
+            user.setSubscribed(true);
+            return appUserRepository.save(user);
+        } else {
+            throw new RuntimeException("User not found with id: " + userId);
+        }
+    }
 }

@@ -10,6 +10,9 @@ public interface AppUserService {
     List<AppUser> getAllUsers();
     AppUser addAppUser(AppUserRequestDTO AppUser);
     AppUser getUserByEmail(String email);
+
+    // New method to subscribe a user
+    AppUser subscribeUser(Long userId);
     //AppUser getCurrentUser(Authentication authentication);
     //AppUser getUserById(Long id);
 

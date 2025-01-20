@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
-function BottomButtons({ setAddReportOpen, isLoggedIn }) {
+function BottomButtons({ setAddReportOpen, isLoggedIn, subscribeUser }) {
     const appVersion = "1.0.0";
 
     const openTermsOfUse = () => {
@@ -19,13 +19,16 @@ function BottomButtons({ setAddReportOpen, isLoggedIn }) {
         <div className="bottom-buttons">
             <div className="left-buttons">
                 {isLoggedIn && (
-                    <button className="subscribe-button">
-                        <FontAwesomeIcon icon={faBell} style={{ marginRight: "8px" }} />
+                    <button
+                        className="subscribe-button"
+                        onClick={subscribeUser}
+                    >
+                        <FontAwesomeIcon icon={faBell} style={{marginRight: "8px"}}/>
                         Subscribe
                     </button>
                 )}
                 <button className="emergency-call-button">
-                    <FontAwesomeIcon icon={faPhone} style={{ marginRight: "8px" }} />
+                <FontAwesomeIcon icon={faPhone} style={{ marginRight: "8px" }} />
                     Call an emergency line
                 </button>
             </div>

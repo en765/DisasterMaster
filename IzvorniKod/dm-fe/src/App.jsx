@@ -66,6 +66,30 @@ function App() {
     setMenuOpen(false);
   };
 
+  const subscribeUser = async () => {
+    if (!userName) {
+      console.error("No username available; user might not be logged in.");
+      return;
+    }
+    console.log("subscribeUser function called with userName:", userName);
+    try {
+      const response = await fetch("http://localhost:8080/users/subscribe", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ userName }),
+      });
+      if (response.ok) {
+        const updatedUser = await response.json();
+        console.log("User subscribed successfully:", updatedUser);
+      } else {
+        const errorMsg = await response.text();
+        console.error("Subscription failed:", errorMsg);
+      }
+    } catch (error) {
+      console.error("Error while subscribing user:", error);
+    }
+  };
+
   useEffect(() => {
     const checkLogin = async () => {
       try {
@@ -126,7 +150,8 @@ function App() {
                       )}
                       <BottomButtons
                           setAddReportOpen={setAddReportOpen}
-                          isLoggedIn={isLoggedIn} // Pass login state
+                          isLoggedIn={isLoggedIn}
+                          subscribeUser={subscribeUser}
                       />
                     </div>
                   }

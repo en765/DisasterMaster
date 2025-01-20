@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class AppUser {
 
     @Id
@@ -21,11 +21,10 @@ public class AppUser {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name="role_id")
+    @JoinColumn(name = "role_id")
     private Role role;
 
-    // Dodan je atribut isSubscribed, inicijalno postavljen na false
-    @NotNull
+    @Column(name = "is_subscribed", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isSubscribed = false;
 
     public AppUser() {}
