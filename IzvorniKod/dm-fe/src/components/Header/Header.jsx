@@ -26,7 +26,7 @@ function Header({ menuOpen, setMenuOpen, onLoginOpen, isLoggedIn, onLogout, user
                 </div>
             ) : (
                 <button className="login" onClick={onLoginOpen}>
-                    <FontAwesomeIcon icon={faUser} style={{ marginRight: "8px" }} />
+                    <FontAwesomeIcon icon={faUser} style={{ marginRight: "5px" }} />
                     Log in
                 </button>
             )}

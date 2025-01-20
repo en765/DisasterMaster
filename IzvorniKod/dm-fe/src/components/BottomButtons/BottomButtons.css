@@ -87,8 +87,9 @@
         font-size: 17px;
         height: 70px;
         position: absolute;
-        right: 27%;
+        left: 30%;
         bottom: 220px;
+        width: 250px;
         padding: 5px 10px;
     }
 
@@ -101,7 +102,7 @@
         align-items: center;
         position: absolute;
         bottom: 10px;
-        left: 37%;
+        left: 40%;
     }
 
     .bottom-info p {
@@ -128,7 +129,7 @@
         width: 200px;
         gap: 10px;
         position: absolute;
-        left: 27%;
+        left: 33%;
         bottom: 120px;
     }
 
@@ -152,7 +153,7 @@
         font-size: 17px;
         height: 70px;
         position: absolute;
-        right: 27%;
+        left: 21%;
         bottom: 220px;
         padding: 5px 10px;
     }

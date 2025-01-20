@@ -16,10 +16,9 @@
     padding: 20px;
     border-radius: 8px;
     width: 500px;
-    height: 800px;
+    height: 700px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     font-family: "Gill Sans", sans-serif;
-
 }
 
 .form-content h2 {
@@ -72,4 +71,19 @@
     border: none;               /* Bez ivica */
     margin: 5px;                /* Razmak između dugmadi */
 
+}
+
+@media (max-width: 768px) {
+    .weather-report-form {
+        position: fixed;
+        top: 0px;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+    }
 }

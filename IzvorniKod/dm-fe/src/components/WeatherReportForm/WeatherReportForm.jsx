@@ -117,7 +117,7 @@ const handleSubmit = async (event) => {
                 onChange={handleLocationChange}
             />
             <button type="button" onClick={handleLocationSubmit}>Search</button>
-            <div id="map" style={{ height: "350px", width: "100%" }}></div>
+            <div id="map" style={{ height: "270px", width: "100%" }}></div>
             <label>Description</label>
             <textarea
                 placeholder="Describe the situation"
