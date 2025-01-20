@@ -14,6 +14,7 @@ import SafetyMeasures from "./components/SafetyMeasures/SafetyMeasures.jsx";
 import NearestShelters from "./components/NearestShelters/NearestShelters.jsx";
 import AvailableResources from "./components/AvailableResources/AvailableResources.jsx";
 import SubscribeModal from "./components/SubscribeModal/SubscribeModal.jsx";
+import EditorDashboard from "./components/EditorDashboard/EditorDashboard.jsx";
 import "./App.css";
 
 const clientId = "800763204372-6hekpah0bsrb62mhp0oi16522ihbpi0b.apps.googleusercontent.com";
@@ -113,6 +114,8 @@ function App() {
                         <Route path="/safety-measures" element={<SafetyMeasures menuOpen={menuOpen} setMenuOpen={setMenuOpen} />} />
                         <Route path="/nearest-shelters" element={<NearestShelters menuOpen={menuOpen} setMenuOpen={setMenuOpen} />} />
                         <Route path="/available-resources" element={<AvailableResources menuOpen={menuOpen} setMenuOpen={setMenuOpen} />} />
+                        
+                        <Route path="/editor-dashboard" element={<EditorDashboard />} />
                     </Routes>
                 </div>
             </Router>

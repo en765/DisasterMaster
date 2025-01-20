@@ -129,8 +129,8 @@ const handleSubmit = async (event) => {
               <input type="file" />
             </label>
             <div className="form-buttons">
-              <button type="button" onClick={closeReportForm}>Cancel</button>
-              <button type="submit">Submit</button>
+              <button type="button" class="button-form" onClick={closeReportForm}>Cancel</button>
+              <button type="submitt" class="button-form">Submit</button>
             </div>
           </form>
         </div>

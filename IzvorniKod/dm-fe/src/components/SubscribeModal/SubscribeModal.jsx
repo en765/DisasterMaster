@@ -30,7 +30,7 @@ const SubscribeModal = ({ onClose }) => {
   return (
     <div className="subscribe-modal">
       <div className="modal-content">
-        <button className="close-button" onClick={onClose}>
+        <button className="close-buttonn" onClick={onClose}>
           x
         </button>
         <h2>Subscribe for Notifications</h2>

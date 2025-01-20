@@ -55,6 +55,29 @@
     background-color: #7f9eced1;
 }
 
+@media (max-width: 768px) {
+    .title {
+        font-family: "Gill Sans", sans-serif;
+        font-size: 40px;
+        margin-left: -25px;
+        margin-right: 25px;
+        text-align: center;
+        flex-grow: 1;
+        padding-left: 60px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 20px;
+        margin-bottom: -250px;
+    }
+
+}
+
 @media (max-width: 480px) {
     .title {
         font-family: "Gill Sans", sans-serif;

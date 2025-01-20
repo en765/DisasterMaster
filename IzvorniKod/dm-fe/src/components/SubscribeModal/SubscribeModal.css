@@ -52,7 +52,7 @@ button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-.close-button {
+.close-buttonn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,6 +68,6 @@ button[type="submit"]:hover {
   width: 30px;
 }
 
-.close-button:hover {
+.close-buttonn:hover {
   background-color: #0056b3; /* Dodaje boju prilikom hovera */
 }

@@ -72,6 +72,20 @@
   line-height: 30px;
 }
 
+@media (max-width: 768px) {
+  .map-container {
+    width: 50%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -60px; /* Horizontally centers the container */
+    text-align: center;
+    position: relative; /* Ensures no external elements affect its layout */
+  }
+}
+
 @media (max-width: 480px) {
   .map-container {
     width: 50%;
