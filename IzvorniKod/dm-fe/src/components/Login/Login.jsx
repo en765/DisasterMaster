@@ -41,26 +41,29 @@ export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
 
   // Redirect user to the backend for Google login
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google",
-      "GoogleLogin",
-      "width=600,height=700";
-  };
+      const popup = window.open(
+        "http://localhost:8080/oauth2/authorization/google",
+        "GoogleLogin",
+        "width=600,height=700"
+      );
 
-  // Poll the popup to check for closure
-  const interval = setInterval(async () => {
-    try {
-      if (popup.closed) {
-        clearInterval(interval); // Stop polling when popup is closed
-        const userName = await fetchUserName();
-        if (userName) {
-          alert(`⁠ Welcome, ${userName}! `);
-          onLoginSuccess(); // Notify the parent of login success
+      // Poll the popup to check for closure
+      const interval = setInterval(async () => {
+        try {
+          if (popup.closed) {
+            clearInterval(interval); // Stop polling when popup is closed
+            const userName = await fetchUserName();
+            if (userName) {
+              alert(`Welcome, ${userName}!`);
+              onLoginSuccess(); // Notify the parent of login success
+            }
+          }
+        } catch (err) {
+          console.error("Error during popup polling:", err);
         }
-      }
-    } catch (err) {
-      console.error("Error during popup polling:", err);
-    }
-  }, 1000);
+      }, 1000);
+    };
+
 
 const fetchUserName = async () => {
   try {

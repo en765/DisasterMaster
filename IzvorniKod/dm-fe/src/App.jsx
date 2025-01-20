@@ -38,7 +38,6 @@ function App() {
     setIsLoginOpen(true); // Open the login overlay
   };
 
-// ova funkcija
   const handleLoginSuccess = async () => {
     try {
       const response = await fetch("http://localhost:8080/login-success", {
@@ -69,7 +68,6 @@ function App() {
     setMenuOpen(false);
   };
 
-// ova funkcija
   useEffect(() => {
     // Check if the user is already logged in
     const checkLogin = async () => {
@@ -91,8 +89,6 @@ function App() {
     checkLogin();
   }, []); // Runs only once when the component mounts
 
-
-// ovdje su jos neke razlike, pogledati
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <Router>
