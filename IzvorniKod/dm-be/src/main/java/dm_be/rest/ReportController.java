@@ -40,7 +40,7 @@ public class ReportController {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://disastermaster.onrender.com") // Frontend URL
+                        .allowedOrigins("http://localhost:3000/") // Frontend URL
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*")
                         .allowCredentials(true);
