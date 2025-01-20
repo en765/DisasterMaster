@@ -1,18 +1,28 @@
-# Use an official Maven image as the base image
-FROM maven:3.9.6-amazoncorretto-17 AS build
-# Set the working directory in the container
-WORKDIR /app
-# Copy the pom.xml and the project files to the container
-COPY pom.xml .
-COPY src ./src
-# Build the application using Maven
-RUN mvn clean package -DskipTests
-# Use an official OpenJDK image as the base image
-FROM amazoncorretto:17-alpine3.19
-# Set the working directory in the container
-WORKDIR /app
-# Copy the built JAR file from the previous stage to the container
-COPY --from=build /app/target/backend-0.0.1.jar .
+# Container za izgradnju (build) aplikacije
+FROM openjdk:17-alpine AS builder
+
+# Kopiranje izvornog koda u container
+COPY ../../.mvn .mvn
+COPY ../../mvnw .
+COPY ../../pom.xml .
+COPY ../../src src
+RUN chmod +x mvnw
+
+# Pokretanje builda
+RUN ./mvnw clean package
+
+# Stvaranje containera u kojem ce se vrtiti aplikacija
+FROM openjdk:17-alpine
+
+## Ovdje je moguce instalirati alate potrebne za rad aplikacije. Vjerojatno vam nece trebati, no dobro je znati.
+## Linux distro koji se koristi je Alpine, stoga se kao package manager koristi apk
+#RUN apk install <nesto>
+
+# Kopiranje izvrsnog JAR-a iz build containera u izvrsni container
+COPY --from=builder target/*.jar /app.jar
+
+# Izlaganje porta
 EXPOSE 8080
-# Set the command to run the application
-CMD ["java", "-jar", "backend-0.0.1.jar"]
+
+# Naredba kojom se pokrece aplikacija
+ENTRYPOINT ["java","-jar","/app.jar"]
