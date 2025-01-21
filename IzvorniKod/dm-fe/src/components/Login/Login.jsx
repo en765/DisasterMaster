@@ -42,7 +42,7 @@ export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
   // Redirect user to the backend for Google login
   const handleGoogleLogin = () => {
       const popup = window.open(
-        "http://localhost:8080/oauth2/authorization/google",
+        "https://server-dm.onrender.com/oauth2/authorization/google",
         "GoogleLogin",
         "width=600,height=700"
       );
