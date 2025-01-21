@@ -63,43 +63,37 @@ function WeatherReportForm({ type, closeReportForm }) {
     }
   };
 
-const handleSubmit = async (event) => {
-  event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
   
-  // Kreiranje objekta za slanje na backend
-  const report = {
-    disasterType: type.toUpperCase(), // Pretpostavljamo da je `type` u odgovarajućem formatu
-    location,
-    description,
-    createdAt: new Date().toISOString(),
-    photo: document.querySelector("input[type=file]").files[0]
-      ? URL.createObjectURL(document.querySelector("input[type=file]").files[0])
-      : null,
-  };
-  
-  try {
-    // Konfiguracija HTTP POST zahteva
-    const response = await fetch("https://server-dm.onrender.com/reports/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(report),
-    });
-  
-    if (response.ok) {
-      const createdReport = await response.json();
-      console.log("Kreiran report:", createdReport);
-      closeReportForm(); // Zatvara formu nakon uspešnog kreiranja
-    } else {
-      console.error("Greška prilikom kreiranja reporta:", response.status);
-      alert("Greška prilikom kreiranja reporta. Pokušajte ponovo.");
+    const formData = new FormData();
+    formData.append("disasterType", type.toUpperCase());
+    formData.append("location", location);
+    formData.append("description", description);
+    const fileInput = document.querySelector("input[type=file]");
+    if (fileInput && fileInput.files[0]) {
+      formData.append("photo", fileInput.files[0]);
     }
-  } catch (error) {
-    console.error("Greška u komunikaciji sa serverom:", error);
-    alert("Došlo je do greške. Pokušajte ponovo.");
-  }
-};
+  
+    try {
+      const response = await fetch("https://server-dm.onrender.com/reports/add", {
+        method: "POST",
+        body: formData,
+      });
+  
+      if (response.ok) {
+        const createdReport = await response.json();
+        console.log("Kreiran report:", createdReport);
+        closeReportForm();
+      } else {
+        console.error("Greška prilikom kreiranja reporta:", response.status);
+        alert("Greška prilikom kreiranja reporta. Pokušajte ponovo.");
+      }
+    } catch (error) {
+      console.error("Greška u komunikaciji sa serverom:", error);
+      alert("Došlo je do greške. Pokušajte ponovo.");
+    }
+  };
 
   return (
       <div className="weather-report-form">
