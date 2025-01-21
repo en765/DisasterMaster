@@ -109,7 +109,7 @@ function WeatherReportForm({ type, closeReportForm }) {
                 value={locationInput}
                 onChange={handleLocationChange}
             />
-            <button type="button" onClick={handleLocationSubmit}>Search</button>
+            <button class="form-search" onClick={handleLocationSubmit}>Search</button>
             <div id="map" style={{ height: "270px", width: "100%" }}></div>
             <label>Description</label>
             <textarea

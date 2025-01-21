@@ -1,42 +1,32 @@
 #nearest-shelters {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 20px;
   position: relative;
-  top: 200px;
-  width: 300px;
-  left: 40%;
+  top: 120px;
   align-items: center;
 }
 
-#nearest-shelters p {
-  color: rgb(40, 38, 38);
+#nearest-shelters h1 {
+  font-size: 26px;
 }
 
-h1 {
-  font-size: 25px;
-  margin-top: 20px;
+#nearest-shelters p {
+  margin-bottom: -0.2%;
+  margin-top: -1%;
 }
 
 #nearest-shelters input {
-  width: 80%;
   padding: 10px;
-  margin: 10px 0;
+  margin: 10px;
+  width: 300px;
   font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-button.container {
-  background-color: rgba(37, 37, 37, 0.366);
-  color: white;
-}
-
-button.container:hover {
-  background-color: rgba(11, 11, 11, 0.366);
-  color: white;
-}
-
-
-button.search {
+#nearest-shelters button.search {
   padding: 10px 20px;
   font-size: 16px;
   background-color: #007bff;
@@ -44,30 +34,59 @@ button.search {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 100px;
 }
 
-button.search:hover {
+#nearest-shelters button.search:hover {
   background-color: #0056b3;
 }
 
+#nearest-shelters p {
+  color: black;
+}
+
+#results {
+  margin-top: 15px;
+  display: flex;              /* Koristi flexbox */
+  flex-direction: row;        /* Postavlja elemente u red */
+  flex-wrap: wrap;            /* Omogućava prelamanje na novi red */
+  justify-content: flex-start; /* Prilagodite poravnanje (npr. center, space-between) */
+  gap: 20px;    
+}
+
 .shelter-results {
-  margin-top: 20px;
-  text-align: left;
+  margin-top: -10px;
+  display: flex;              /* Koristi flexbox */
+  flex-direction: row;        /* Postavlja elemente u red */
+  flex-wrap: wrap;            /* Omogućava prelamanje na novi red */
+  justify-content: flex-start; /* Prilagodite poravnanje (npr. center, space-between) */
+  gap: 20px;               /* Razmak između kartica */
 }
 
 .shelter-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   padding: 15px;
-  margin: 10px 0;
   background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px;              /* Širina kartice */
+  box-sizing: border-box;   /* Osiguravamo da padding nije uključen u širinu */
 }
 
 .shelter-card h3 {
-  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
 
 .shelter-card p {
   margin: 5px 0;
+  color: #555;
 }
 
+#container {
+  margin-top: 20px;
+}
