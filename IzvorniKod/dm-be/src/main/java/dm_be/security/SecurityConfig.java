@@ -24,14 +24,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors() // CORS konfiguracija se dodaje odvojeno
+            .and()
+            .csrf().disable() // Možeš dodati CSRF zaštitu ako koristiš token
             .authorizeHttpRequests()
-            .requestMatchers("/login-success", "/h2-console/**", "/users/**").authenticated()
-            .anyRequest().authenticated()
+            .requestMatchers("/users/login-success", "/users/register", "/reports/**").permitAll() // Dozvoli nesigurne pristupe za određene rute
+            .anyRequest().authenticated() // Sve ostale rute zahtevaju autentifikaciju
             .and()
             .oauth2Login().defaultSuccessUrl("/login-success", true);
-
         return http.build();
-
     }
 
 }
+
+
