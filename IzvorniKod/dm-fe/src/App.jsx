@@ -40,7 +40,7 @@ function App() {
 
   const handleLoginSuccess = async () => {
     try {
-      const response = await fetch("http://localhost:8080/login-success", {
+      const response = await fetch("https://server-dm.onrender.com/login-success", {
         method: "GET",
         credentials: "include", // Ensure cookies are sent with the request
       });
@@ -72,7 +72,7 @@ function App() {
     // Check if the user is already logged in
     const checkLogin = async () => {
       try {
-        const response = await fetch("http://localhost:8080/login-success", {
+        const response = await fetch("https://server-dm.onrender.com/login-success", {
           method: "GET",
           credentials: "include",
         });

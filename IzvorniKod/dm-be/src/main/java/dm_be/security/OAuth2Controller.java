@@ -13,7 +13,7 @@ import dm_be.domain.AppUser;
 import dm_be.domain.Role;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://disastermaster.onrender.com")
 public class OAuth2Controller {
 
     @Autowired
