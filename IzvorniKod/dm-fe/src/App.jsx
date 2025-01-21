@@ -44,7 +44,7 @@ function App() {
 
   const handleLoginSuccess = async () => {
     try {
-      const response = await fetch(`${BACKEND_URL}/login-success`, {
+      const response = await fetch(`https://server-dm.onrender.com/login-success`, {
         method: "GET",
         credentials: "include", // Slanje kolačića za sesiju
       });
@@ -76,7 +76,7 @@ function App() {
     // Proveri da li je korisnik već prijavljen
     const checkLogin = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/login-success`, {
+        const response = await fetch(`https://server-dm.onrender.com/login-success`, {
           method: "GET",
           credentials: "include",
         });
