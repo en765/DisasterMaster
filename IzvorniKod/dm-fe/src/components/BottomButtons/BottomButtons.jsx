@@ -1,5 +1,6 @@
 import React from "react";
 import "./BottomButtons.css";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +16,8 @@ function BottomButtons({ setAddReportOpen, openSubscribeModal }) { // Dodali smo
     window.open("/user-guide.pdf", "_blank");
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="bottom-buttons">
       <div className="left-buttons">
@@ -25,7 +28,7 @@ function BottomButtons({ setAddReportOpen, openSubscribeModal }) { // Dodali smo
           <FontAwesomeIcon icon={faBell} style={{ marginRight: '8px' }} />
           Subscribe
         </button>
-        <button className="emergency-call-button">
+        <button onClick={() => navigate('/available-resources')} className="emergency-call-button">
           <FontAwesomeIcon icon={faPhone} style={{ marginRight: '8px' }} />
           Call an emergency line
         </button>

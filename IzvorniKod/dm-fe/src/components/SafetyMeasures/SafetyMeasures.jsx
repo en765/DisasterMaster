@@ -23,7 +23,7 @@ function SafetyMeasures({ onClose, menuOpen, setMenuOpen}) {
   
   return (
     <div id="safety-measures-page">
-      {menuOpen && <Menu />}
+      {/* {menuOpen && <Menu closeMenu={() => setMenuOpen(false)} />} */}
       <h2>Safety Measures</h2>
       <ul class="centered-list">
         <li>stay informed with reliable emergency updates</li>
@@ -57,8 +57,8 @@ function SafetyMeasures({ onClose, menuOpen, setMenuOpen}) {
         </ul>
       </section>
 
-      <div id="container">
-        <button onClick={() => navigate("/")}>Back to Home</button>
+      <div id="container" >
+        <button className="container" onClick={() => navigate("/")}>Back to Home</button>
       </div>
     </div>
   );
