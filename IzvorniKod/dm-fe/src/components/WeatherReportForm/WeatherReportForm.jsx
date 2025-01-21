@@ -80,7 +80,6 @@ const handleSubmit = async (event) => {
   try {
     // Konfiguracija HTTP POST zahteva
     const response = await fetch("https://server-dm.onrender.com/reports/add", {
-      mode: 'no-cors',
       method: "POST",
       headers: {
         "Content-Type": "application/json",
