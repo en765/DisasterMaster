@@ -67,7 +67,7 @@ export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
 
 const fetchUserName = async () => {
   try {
-    const response = await fetch("http://localhost:8080/login-success", {
+    const response = await fetch("https://server-dm.onrender.com/login-success", {
       method: "GET",
       credentials: "include", // Ensure cookies are sent with the request
     });
