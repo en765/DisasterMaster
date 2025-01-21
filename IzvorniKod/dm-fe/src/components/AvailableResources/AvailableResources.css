@@ -1,3 +1,12 @@
+#available-resources {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+  top: 80px;
+  margin-top: 11px;
+}
+
 .available-resources-title {
   text-align: center;
   margin-bottom: 20px;
@@ -6,20 +15,28 @@
 
 .emergency-contacts-container {
   display: flex;
-  gap: 20px;
-  justify-content: space-between;
+  justify-content: space-between; /* Dodaje razmak između columna */
+  align-items: flex-start; /* Poravnava sadržaj unutar columna */
+  gap: 15px;
+  width: 100%; /* Proširuje container preko cijelog ekrana */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.emergency-contacts {
-  width: 48%;
+.emergency-contacts-left-column {
+  height: fit-content;
   background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
-  padding: 20px; /* Add some padding for spacing inside the container */
-  border-radius: 8px; /* Optional: Adds rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better contrast */
+  padding: 10px;
+}
+
+.emergency-contacts-right-column {
+  height: fit-content;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+  padding: 10px;
 }
 
 .left-column {
-  border-right: 1px solid #ddd;
   padding-right: 10px;
 }
 
@@ -48,4 +65,46 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+button.container {
+  background-color: rgba(37, 37, 37, 0.366);
+  color: white;
+}
+
+button.container:hover {
+  background-color: rgba(11, 11, 11, 0.366);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  #available-resources {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    position: relative;
+    top: 160px;
+  }
+
+  .emergency-contacts-container {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+    font-size: 12px;
+    top: 10px;
+    border-radius: 5px;
+  }
+
+  .left-column {
+    padding-right: 10px;
+
+  }
+  
+  .right-column {
+    margin-bottom: 40px;
+  }
+
+  li {
+    margin: 5px 0;
+  }
 }

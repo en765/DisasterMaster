@@ -1,53 +1,73 @@
-.nearest-shelters {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-  }
+#nearest-shelters {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+  top: 200px;
+  width: 300px;
+  left: 40%;
+  align-items: center;
+}
+
+#nearest-shelters p {
+  color: rgb(40, 38, 38);
+}
 
 h1 {
   font-size: 25px;
+  margin-top: 20px;
 }
-  
-  .nearest-shelters input {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 16px;
-  }
-  
-  .nearest-shelters button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .nearest-shelters button:hover {
-    background-color: #0056b3;
-  }
-  
-  .shelter-results {
-    margin-top: 20px;
-    text-align: left;
-  }
-  
-  .shelter-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    margin: 10px 0;
-    background-color: #f9f9f9;
-  }
-  
-  .shelter-card h3 {
-    margin: 0 0 10px 0;
-  }
-  
-  .shelter-card p {
-    margin: 5px 0;
-  }
-  
+
+#nearest-shelters input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+button.container {
+  background-color: rgba(37, 37, 37, 0.366);
+  color: white;
+}
+
+button.container:hover {
+  background-color: rgba(11, 11, 11, 0.366);
+  color: white;
+}
+
+
+button.search {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.search:hover {
+  background-color: #0056b3;
+}
+
+.shelter-results {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.shelter-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+.shelter-card h3 {
+  margin: 0 0 10px 0;
+}
+
+.shelter-card p {
+  margin: 5px 0;
+}
+

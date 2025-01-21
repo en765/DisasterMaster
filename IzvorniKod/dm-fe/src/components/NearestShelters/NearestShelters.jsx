@@ -31,8 +31,9 @@ function NearestShelters() {
     ];
     setShelters(mockShelters);
   };
+  const navigate = useNavigate();
   return (
-    <div className="nearest-shelters">
+    <div id="nearest-shelters">
       <h1>Nearest Shelters</h1>
       <p>Enter your location to find nearby shelters:</p>
       <input
@@ -41,7 +42,7 @@ function NearestShelters() {
         value={location}
         onChange={handleInputChange}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button className="search" onClick={handleSearch}>Search</button>
 
       <div className="shelter-results">
         {shelters.length > 0 ? (
@@ -56,6 +57,10 @@ function NearestShelters() {
         ) : (
           <p>No shelters found. Enter a location to search.</p>
         )}
+      </div>
+
+      <div id="container" >
+        <button className="container" onClick={() => navigate("/")}>Back to Home</button>
       </div>
     </div>
   );

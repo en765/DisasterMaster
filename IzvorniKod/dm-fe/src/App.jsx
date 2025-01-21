@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// Importuješ sve potrebne komponente
 import Header from "./components/Header/Header.jsx";
 import Menu from "./components/Menu/Menu.jsx";
 import Map from "./components/Map/Map.jsx";
@@ -51,7 +50,7 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error("Neuspelo preuzimanje korisničkih podataka");
+        throw new Error("Neuspjelo preuzimanje korisničkih podataka");
       }
 
       const userName = await response.text();

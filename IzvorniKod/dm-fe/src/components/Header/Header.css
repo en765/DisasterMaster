@@ -108,6 +108,7 @@
         text-align: center;
         flex-grow: 1;
         padding-left: 60px;
+        color: black;
     }
 
     .title-link {

@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import "./AvailableResources.css";
 import { useNavigate } from "react-router-dom";
 import Menu from "../Menu/Menu.jsx";
+import Header from "../Header/Header.jsx";
 
-function AvailableResources({ onClose, menuOpen, setMenuOpen }) {
+function AvailableResources({ onClose, menuOpen, setMenuOpen}) {
+  const navigate = useNavigate();
   return (
-    <div>
-      {menuOpen && <Menu setMenuOpen={setMenuOpen} />}
+    <div id="available-resources">
+      {/*{menuOpen && <Menu setMenuOpen={setMenuOpen} />}*/}
       <div className="available-resources-title">
         <h2>Emergency Contacts</h2>
       </div>
       <div className="emergency-contacts-container">
         {/* Left Column */}
-        <div className="emergency-contacts left-column">
+        <div className="emergency-contacts-left-column">
           <h3>General Emergency Numbers</h3>
           <ul>
             <li>
@@ -70,7 +72,7 @@ function AvailableResources({ onClose, menuOpen, setMenuOpen }) {
         </div>
 
         {/* Right Column */}
-        <div className="emergency-contacts right-column">
+        <div className="emergency-contacts-right-column">
           <h3>Flood and Storm Hotlines</h3>
           <ul>
             <li>
@@ -185,6 +187,10 @@ function AvailableResources({ onClose, menuOpen, setMenuOpen }) {
             </li>
           </ul>
         </div>
+      </div>
+
+      <div id="container" >
+        <button className="container" onClick={() => navigate("/")}>Back to Home</button>
       </div>
     </div>
   );
