@@ -1,0 +1,92 @@
+#nearest-shelters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  top: 120px;
+  align-items: center;
+}
+
+#nearest-shelters h1 {
+  font-size: 26px;
+}
+
+#nearest-shelters p {
+  margin-bottom: -0.2%;
+  margin-top: -1%;
+}
+
+#nearest-shelters input {
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#nearest-shelters button.search {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+
+#nearest-shelters button.search:hover {
+  background-color: #0056b3;
+}
+
+#nearest-shelters p {
+  color: black;
+}
+
+#results {
+  margin-top: 15px;
+  display: flex;              /* Koristi flexbox */
+  flex-direction: row;        /* Postavlja elemente u red */
+  flex-wrap: wrap;            /* Omogućava prelamanje na novi red */
+  justify-content: flex-start; /* Prilagodite poravnanje (npr. center, space-between) */
+  gap: 20px;    
+}
+
+.shelter-results {
+  margin-top: -10px;
+  display: flex;              /* Koristi flexbox */
+  flex-direction: row;        /* Postavlja elemente u red */
+  flex-wrap: wrap;            /* Omogućava prelamanje na novi red */
+  justify-content: flex-start; /* Prilagodite poravnanje (npr. center, space-between) */
+  gap: 20px;               /* Razmak između kartica */
+}
+
+.shelter-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px;              /* Širina kartice */
+  box-sizing: border-box;   /* Osiguravamo da padding nije uključen u širinu */
+}
+
+.shelter-card h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.shelter-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+#container {
+  margin-top: 20px;
+}
