@@ -90,7 +90,7 @@ function WeatherReportForm({ type, closeReportForm }) {
 
     try {
       // Send the POST request to the backend
-      const response = await fetch(`http://localhost:8080/reports/add`, {
+      const response = await fetch(`https://server-dm.onrender.com/reports/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
