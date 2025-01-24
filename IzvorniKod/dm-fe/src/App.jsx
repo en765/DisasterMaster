@@ -18,8 +18,7 @@ import "./App.css";
 // Google OAuth Client ID
 const clientId = "800763204372-6hekpah0bsrb62mhp0oi16522ihbpi0b.apps.googleusercontent.com";
 
-// Hardcode backend URL
-const BACKEND_URL = "https://server-dm.onrender.com";
+
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,6 +27,9 @@ function App() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Praćenje stanja prijave
   const [userName, setUserName] = useState(""); // Ime korisnika nakon prijave
+
+  // Hardcode backend URL
+  const be = "https://server-dm.onrender.com";
 
   const openReportForm = (type) => {
     setReportType(type);
@@ -44,7 +46,7 @@ function App() {
 
   const handleLoginSuccess = async () => {
     try {
-      const response = await fetch(`https://server-dm.onrender.com/login-success`, {
+      const response = await fetch(`${be}/login-success`, {
         method: "GET",
         credentials: "include", // Slanje kolačića za sesiju
       });
@@ -64,8 +66,9 @@ function App() {
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Odjava korisnika
-    setUserName("");
+      setIsLoggedIn(false); // Odjava korisnika
+      setUserName("");
+      window.google.accounts.id.revoke();
   };
 
   const closeMenu = () => {
@@ -76,7 +79,7 @@ function App() {
     // Proveri da li je korisnik već prijavljen
     const checkLogin = async () => {
       try {
-        const response = await fetch(`https://server-dm.onrender.com/login-success`, {
+        const response = await fetch(`${be}/login-success`, {
           method: "GET",
           credentials: "include",
         });

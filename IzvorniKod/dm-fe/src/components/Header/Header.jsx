@@ -19,9 +19,9 @@ function Header({ menuOpen, setMenuOpen, onLoginOpen, isLoggedIn, onLogout, user
             {isLoggedIn ? (
                 <div className="user-info">
                     <span className="user-name">{userName}</span>
-                    <button className="logout" onClick={onLogout}>
-                        <FontAwesomeIcon icon={faUser} style={{ marginRight: "8px" }} />
-                        Log out
+                    <button className="login" onClick={() => { onLogout(); }}>
+                      <FontAwesomeIcon icon={faUser} style={{ marginRight: "8px" }} />
+                      Log out
                     </button>
                 </div>
             ) : (
