@@ -59,4 +59,23 @@ public class ReportController {
         }
     }
 
+    /*@PostMapping("/add")
+    public ResponseEntity<Report> addReport(@RequestParam("disasterType") String disasterType,
+                                            @RequestParam("location") String location,
+                                            @RequestParam("description") String description,
+                                            @RequestParam(value = "photo", required = false) MultipartFile photo) {
+        try {
+            ReportRequestDTO reportDTO = new ReportRequestDTO();
+            reportDTO.setDisasterType(DisasterType.valueOf(disasterType.toUpperCase()));
+            reportDTO.setLocation(location);
+            if(description != null) reportDTO.setDescription(description);
+            //ignoriram sliku za sad
+            Report createdReport = reportService.addReport(reportDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdReport);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }*/
+
 }
