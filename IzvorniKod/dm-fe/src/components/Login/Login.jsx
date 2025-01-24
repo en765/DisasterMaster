@@ -7,11 +7,13 @@ export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const be = "https://server-dm.onrender.com";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://server-dm.onrender.com/auth/login",
+        `${be}/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -42,10 +44,23 @@ export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
 
   // Redirect user to the backend for Google login
   const handleGoogleLogin = () => {
+    // Get the screen width and height
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    // Set the width and height of the popup
+    const popupWidth = 500;  // Smaller width
+    const popupHeight = 550; // Smaller height
+
+    // Calculate the position of the popup to center it
+    const left = (screenWidth - popupWidth) / 2;
+    const top = (screenHeight - popupHeight) / 2;
+
+    // Open the popup with the calculated dimensions and position
     const popup = window.open(
-      "https://server-dm.onrender.com/oauth2/authorization/google",
-      "GoogleLogin",
-      "width=600,height=700"
+        `${be}/oauth2/authorization/google`,
+        "GoogleLogin",
+        `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`
     );
 
     // Poll the popup to check for closure
@@ -68,7 +83,7 @@ export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
   const fetchUserName = async () => {
     try {
       const response = await fetch(
-        "https://server-dm.onrender.com/login-success",
+        `${be}/login-success`,
         {
           method: "GET",
           credentials: "include", // Ensure cookies are sent with the request

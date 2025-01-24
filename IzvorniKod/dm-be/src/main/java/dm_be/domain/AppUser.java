@@ -24,6 +24,13 @@ public class AppUser {
     @NotNull
     private String password;
 
+    @NotNull
+    private boolean subbed;
+
+    public boolean getSubbed() { return subbed;}
+
+    public void setSubbed(boolean subbed) {this.subbed = subbed;}
+
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;

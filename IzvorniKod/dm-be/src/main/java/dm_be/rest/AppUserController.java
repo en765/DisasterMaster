@@ -1,5 +1,6 @@
 package dm_be.rest;
 
+import dm_be.dao.AppUserRepository;
 import dm_be.service.*;
 import dm_be.domain.*;
 import dm_be.dto.AppUserRequestDTO;
@@ -24,6 +25,9 @@ public class AppUserController {
     @Autowired
     private AppUserService appUserService;
 
+    @Autowired
+    private AppUserRepository appUserRepository;
+
     //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("")
     public List<AppUser> getAllUsers() {
@@ -34,6 +38,15 @@ public class AppUserController {
     public ResponseEntity<AppUser> addAppUser(@RequestBody AppUserRequestDTO appUser) {
         AppUser createdUser = appUserService.addAppUser(appUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+
+    @PostMapping("/subescribe")
+    public ResponseEntity<String> subscribe(@RequestBody String email) {
+        // ovo je kao uz pretpostavku da ako je netko anoniman, onda ni ne zeli obavijesti
+        AppUser updateUser = appUserRepository.findByEmail(email); //nadi tog usera
+        updateUser.setSubbed(true); // zakaci da zeli obavijesti -> kako stavimo da je default false
+        appUserRepository.save(updateUser);
+        return ResponseEntity.ok("Dobili email!");
     }
 
 
