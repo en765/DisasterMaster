@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import L from "leaflet";
 import "./WeatherReportForm.css";
-import 'leaflet/dist/leaflet.css';
+import "leaflet/dist/leaflet.css";
 
 function WeatherReportForm({ type, closeReportForm }) {
   const [location, setLocation] = useState("");
@@ -11,18 +11,20 @@ function WeatherReportForm({ type, closeReportForm }) {
   const [locationInput, setLocationInput] = useState("");
 
   useEffect(() => {
-    const mapInstance = L.map('map').setView([51.505, -0.09], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const mapInstance = L.map("map").setView([51.505, -0.09], 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
     }).addTo(mapInstance);
 
     const initialMarker = L.marker([51.505, -0.09]).addTo(mapInstance);
     setMarker(initialMarker);
 
-    mapInstance.on('click', async (e) => {
+    mapInstance.on("click", async (e) => {
       initialMarker.setLatLng(e.latlng);
 
-      const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`);
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`
+      );
       const data = await response.json();
       const displayName = data.display_name || `${e.latlng.lat}, ${e.latlng.lng}`;
       setLocationInput(displayName);
@@ -44,7 +46,9 @@ function WeatherReportForm({ type, closeReportForm }) {
     e.preventDefault();
     if (locationInput) {
       try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${locationInput}`);
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${locationInput}`
+        );
         const data = await response.json();
         if (data.length > 0) {
           const { lat, lon } = data[0];
@@ -65,81 +69,99 @@ function WeatherReportForm({ type, closeReportForm }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    /*const formData = new FormData();
-    formData.append("disasterType", type.toUpperCase());
-    formData.append("location", location);
-    formData.append("description", description);
-    const fileInput = document.querySelector("input[type=file]");
-    if (fileInput && fileInput.files[0]) {
-      formData.append("photo", fileInput.files[0]);
-    }*/
 
+    // Validate location
+    if (!location) {
+      alert("Please select a location.");
+      return;
+    }
+    const userId = 1; // Replace with actual user ID if dynamic
+    // Prepare the request body
     const requestBody = {
-            userId: 1, // Example userId (replace with actual value if available)
-            disasterType: type.toUpperCase(),
-            location,
-            description,
-            createdAt: new Date().toISOString(), // ISO 8601 format
-            photo: "example-photo-string", // Simple placeholder string for now
+      userId,
+      disasterType: type.toUpperCase(), // Ensures it matches the enum on the backend
+      location, // Already set by the map or search
+      description, // User input from the form
+      createdAt: new Date().toISOString(), // Converts to ISO string (valid for LocalDateTime)
+      photo: "example-photo-string", // Replace with actual photo logic or leave placeholder
     };
-  
+
+    console.log("Request Body:", requestBody); // Debugging
+
     try {
-      const response = await fetch("https://server-dm.onrender.com/reports/add", {
+      // Send the POST request to the backend
+      const response = await fetch(`http://localhost:8080/reports/add`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(requestBody),
       });
-  
+
       if (response.ok) {
         const createdReport = await response.json();
-        console.log("Kreiran report:", createdReport);
-        closeReportForm();
+        console.log("Report created:", createdReport);
+        closeReportForm(); // Close the form after successful submission
       } else {
-        console.error("Greška prilikom kreiranja reporta:", response.status);
-        alert("Greška prilikom kreiranja reporta. Pokušajte ponovo.");
+        const errorText = await response.text();
+        console.error("Error creating report:", response.status, errorText);
+        alert(`Error: ${response.status} - ${errorText}`);
       }
     } catch (error) {
-      console.error("Greška u komunikaciji sa serverom:", error);
-      alert("Došlo je do greške. Pokušajte ponovo.");
+      console.error("Error communicating with the server:", error.message);
+      alert("An error occurred. Please try again.");
     }
   };
 
+
   return (
-      <div className="weather-report-form">
-        <div className="form-overlay" onClick={closeReportForm}></div>
-        <div className="form-content">
-          <h2>{type}</h2>
-          <form onSubmit={handleSubmit}>
-            <label style={{ fontSize: "20px" }}>Location or coordinates</label>
-            <input
-                type="text"
-                placeholder="Enter location"
-                style={{ fontSize: "15px" , fontFamily: "Gill Sans"}}
-                value={locationInput}
-                onChange={handleLocationChange}
-            />
-            <button class="form-search" onClick={handleLocationSubmit}>Search</button>
-            <div id="map" style={{ height: "270px", width: "100%" }}></div>
-            <label>Description</label>
-            <textarea
-                placeholder="Describe the situation"
-                style={{ fontSize: "15px" , fontFamily: "Gill Sans"}}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-            <label>
-              <input type="file" />
-            </label>
-            <div className="form-buttons">
-              <button type="button" class="button-form" onClick={closeReportForm}>Cancel</button>
-              <button type="submitt" class="button-form">Submit</button>
-            </div>
-          </form>
-        </div>
+    <div className="weather-report-form">
+      <div className="form-overlay" onClick={closeReportForm}></div>
+      <div className="form-content">
+        <h2>{type}</h2>
+        <form onSubmit={handleSubmit}>
+          <label style={{ fontSize: "20px" }}>Location or coordinates</label>
+          <input
+            type="text"
+            placeholder="Enter location"
+            style={{ fontSize: "15px", fontFamily: "Gill Sans" }}
+            value={locationInput}
+            onChange={handleLocationChange}
+          />
+          <button
+            type="button"
+            className="form-search"
+            onClick={handleLocationSubmit}
+          >
+            Search
+          </button>
+          <div id="map" style={{ height: "270px", width: "100%" }}></div>
+          <label>Description</label>
+          <textarea
+            placeholder="Describe the situation"
+            style={{ fontSize: "15px", fontFamily: "Gill Sans" }}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+          <label>
+            <input type="file" disabled />
+          </label>
+          <div className="form-buttons">
+            <button
+              type="button"
+              className="button-form"
+              onClick={closeReportForm}
+            >
+              Cancel
+            </button>
+            <button type="submit" className="button-form">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
+    </div>
   );
 }
 

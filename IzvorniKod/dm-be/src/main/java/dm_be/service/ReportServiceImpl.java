@@ -36,15 +36,16 @@ public class ReportServiceImpl implements ReportService{
         report.setCreatedAt(reportDTO.getCreatedAt());
         report.setPhoto(reportDTO.getPhoto());
 
+
         // Dodajte proveru za korisnika, ako je `userId` unet u DTO
-        if (reportDTO.getUserId() != null) {
+        /*if (reportDTO.getUserId() != null) {
             AppUser user = appUserRepository.findByUserId(reportDTO.getUserId());  // Provera da li korisnik postoji
             if (user != null) {
                 report.setUser(user);
             } else {
                 throw new RuntimeException("User not found with id: " + reportDTO.getUserId());  // Ako korisnik nije pronađen, bacite izuzetak
             }
-        }
+        }*/
 
         return reportRepository.save(report);  // Spasite report u bazi
     }

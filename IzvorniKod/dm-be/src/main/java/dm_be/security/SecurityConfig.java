@@ -38,7 +38,7 @@ public class SecurityConfig {
             .and()
             .csrf().disable() // Možeš dodati CSRF zaštitu ako koristiš token
             .authorizeHttpRequests()
-            .requestMatchers("/users/login-success", "/users/register", "/reports/**").permitAll() // Dozvoli nesigurne pristupe za određene rute
+            .requestMatchers("/users/login-success", "/users/register", "/reports/add").permitAll() // Dozvoli nesigurne pristupe za određene rute
             .anyRequest().authenticated() // Sve ostale rute zahtevaju autentifikaciju
             .and()
             .oauth2Login().defaultSuccessUrl("/login-success", true);

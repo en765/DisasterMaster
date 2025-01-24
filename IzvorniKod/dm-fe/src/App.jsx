@@ -29,7 +29,7 @@ function App() {
   const [userName, setUserName] = useState(""); // Ime korisnika nakon prijave
 
   // Hardcode backend URL
-  const be = "https://server-dm.onrender.com";
+  const be = "http://localhost:8080";
 
   const openReportForm = (type) => {
     setReportType(type);

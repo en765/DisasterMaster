@@ -25,11 +25,15 @@ public class AppUser {
     private String password;
 
     @NotNull
-    private boolean subbed;
+    private String subbed;
 
-    public boolean getSubbed() { return subbed;}
+    public @NotNull String getSubbed() {
+        return subbed;
+    }
 
-    public void setSubbed(boolean subbed) {this.subbed = subbed;}
+    public void setSubbed(@NotNull String subbed) {
+        this.subbed = subbed;
+    }
 
     @ManyToOne
     @JoinColumn(name="role_id")

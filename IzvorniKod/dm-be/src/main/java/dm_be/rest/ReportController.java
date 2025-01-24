@@ -20,17 +20,17 @@ import dm_be.service.ReportService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/reports")
+@CrossOrigin(origins = "http://localhost:3000")
+//@RequestMapping("/reports")
 public class ReportController {
     
     @Autowired
     private ReportService reportService;
     
-    @GetMapping("/")
+    @GetMapping("/reports")
     public List<Report> getAllReports() {
         return reportService.getAllReports();
     }
-
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -38,7 +38,7 @@ public class ReportController {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://disastermaster.onrender.com") // Frontend URL
+                        .allowedOrigins("http://localhost:3000") // Frontend URL
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -46,7 +46,7 @@ public class ReportController {
         };
     }
 
-    @PostMapping("/add")
+    @PostMapping("/reports/add")
     public ResponseEntity<Report> addReport(@RequestBody ReportRequestDTO reportDTO) {
         try {
             Report createdReport = reportService.addReport(reportDTO);
@@ -56,24 +56,5 @@ public class ReportController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-    /*@PostMapping("/add")
-    public ResponseEntity<Report> addReport(@RequestParam("disasterType") String disasterType,
-                                            @RequestParam("location") String location,
-                                            @RequestParam("description") String description,
-                                            @RequestParam(value = "photo", required = false) MultipartFile photo) {
-        try {
-            ReportRequestDTO reportDTO = new ReportRequestDTO();
-            reportDTO.setDisasterType(DisasterType.valueOf(disasterType.toUpperCase()));
-            reportDTO.setLocation(location);
-            if(description != null) reportDTO.setDescription(description);
-            //ignoriram sliku za sad
-            Report createdReport = reportService.addReport(reportDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdReport);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }*/
 
 }

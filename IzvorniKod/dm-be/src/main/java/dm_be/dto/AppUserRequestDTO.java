@@ -5,13 +5,13 @@ public class AppUserRequestDTO {
     private String password;
     private String email;
     private Long roleId;
-    private boolean subbed;
+    private String subbed;
 
-    public boolean getSubbed() {
+    public String getSubbed() {
         return subbed;
     }
 
-    public void setSubbed(boolean subbed) {
+    public void setSubbed(String subbed) {
         this.subbed = subbed;
     }
 

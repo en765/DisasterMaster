@@ -13,7 +13,7 @@ import dm_be.domain.AppUser;
 import dm_be.domain.Role;
 
 @RestController
-@CrossOrigin(origins = "https://disastermaster.onrender.com")
+@CrossOrigin(origins = "http://localhost:3000")//"https://disastermaster.onrender.com"
 public class OAuth2Controller {
 
     @Autowired
@@ -37,6 +37,7 @@ public class OAuth2Controller {
             newUser.setEmail(userEmail);
             newUser.setUsername(userName);
             newUser.setPassword(""); // Nije potrebno za OAuth2 korisnike
+            newUser.setSubbed("false");
 
 
             appUserRepository.save(newUser);

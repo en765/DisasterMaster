@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "https://disastermaster.onrender.com")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/users")
 public class AppUserController {
     
@@ -44,7 +44,7 @@ public class AppUserController {
     public ResponseEntity<String> subscribe(@RequestBody String email) {
         // ovo je kao uz pretpostavku da ako je netko anoniman, onda ni ne zeli obavijesti
         AppUser updateUser = appUserRepository.findByEmail(email); //nadi tog usera
-        updateUser.setSubbed(true); // zakaci da zeli obavijesti -> kako stavimo da je default false
+        updateUser.setSubbed("true"); // zakaci da zeli obavijesti -> kako stavimo da je default false
         appUserRepository.save(updateUser);
         return ResponseEntity.ok("Dobili email!");
     }
