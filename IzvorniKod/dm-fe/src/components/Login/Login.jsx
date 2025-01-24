@@ -7,7 +7,7 @@ export default function LoginForm({ handleLoginClose, onLoginSuccess }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const be = "http://localhost:8080";
+  const be = "https://server-dm.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();

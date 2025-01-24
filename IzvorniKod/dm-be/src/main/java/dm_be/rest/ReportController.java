@@ -20,7 +20,7 @@ import dm_be.service.ReportService;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://disastermaster.onrender.com")
 //@RequestMapping("/reports")
 public class ReportController {
     
