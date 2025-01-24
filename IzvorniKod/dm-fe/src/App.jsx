@@ -76,7 +76,6 @@ function App() {
   };
 
   useEffect(() => {
-    // Proveri da li je korisnik već prijavljen
     const checkLogin = async () => {
       try {
         const response = await fetch(`${be}/login-success`, {
@@ -89,12 +88,12 @@ function App() {
           setUserName(userName);
         }
       } catch (error) {
-        console.error("Greška pri proveri prijave:", error);
+        console.error("Greška pri provjeri prijave:", error);
       }
     };
 
     checkLogin();
-  }, []); // Izvršava se samo jednom nakon montaže komponente
+  }, []);
 
   return (
     <GoogleOAuthProvider clientId={clientId}>

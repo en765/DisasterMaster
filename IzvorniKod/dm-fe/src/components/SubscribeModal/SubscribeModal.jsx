@@ -9,7 +9,7 @@ const SubscribeModal = ({ onClose }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/subscribe", {
+      const response = await fetch("/users/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

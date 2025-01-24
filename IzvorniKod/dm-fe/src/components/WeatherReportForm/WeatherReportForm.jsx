@@ -66,19 +66,30 @@ function WeatherReportForm({ type, closeReportForm }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    const formData = new FormData();
+    /*const formData = new FormData();
     formData.append("disasterType", type.toUpperCase());
     formData.append("location", location);
     formData.append("description", description);
     const fileInput = document.querySelector("input[type=file]");
     if (fileInput && fileInput.files[0]) {
       formData.append("photo", fileInput.files[0]);
-    }
+    }*/
+    const requestBody = {
+        userId: 1, // Example userId (replace with actual value if available)
+        disasterType: type.toUpperCase(),
+        location,
+        description,
+        createdAt: new Date().toISOString(), // ISO 8601 format
+        photo: "example-photo-string", // Simple placeholder string for now
+    };
   
     try {
       const response = await fetch("https://server-dm.onrender.com/reports/add", {
-        method: "POST",
-        body: formData,
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody),
       });
   
       if (response.ok) {
